@@ -14,6 +14,7 @@ public class SidebarPO extends BasePage {
     }
 
     public EmployeeListPO openPIMPage() {
+        sleep(2);
         clickElement(driver, SidebarPUI.PIM_LINK);
         return PageGenerator.getEmployeeListPage(driver);
     }
