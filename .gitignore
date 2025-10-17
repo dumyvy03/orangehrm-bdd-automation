@@ -13,6 +13,7 @@ reports/
 *.iws
 *.iml
 *.ipr
+.idea/dictionaries/project.xml
 
 ### Eclipse ###
 .apt_generated
