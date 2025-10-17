@@ -22,11 +22,6 @@ public class AddEmployeePO extends BasePage {
         sleep(1);
     }
 
-    private void enterMiddleNameTextbox(String middleName) {
-        sendKeysElement(driver, AddEmployeePUI.MIDDLENAME_TEXTBOX, middleName);
-        sleep(1);
-    }
-
     private void enterLastNameTextbox(String lastName) {
         sendKeysElement(driver, AddEmployeePUI.LASTNAME_TEXTBOX, lastName);
         sleep(1);
@@ -38,9 +33,8 @@ public class AddEmployeePO extends BasePage {
         sleep(1);
     }
 
-    public void enterEmployeeDetails(String firstName, String middleName, String lastName, String avatar) {
+    public void enterEmployeeDetails(String firstName, String lastName, String avatar) {
         enterFirstNameTextbox(firstName);
-        enterMiddleNameTextbox(middleName);
         enterLastNameTextbox(lastName);
         uploadAvatar(avatar);
     }
