@@ -16,9 +16,8 @@ public class AddEmployeeSteps {
         this.testContext = testContext;
     }
 
-    private void saveEmployeeData(String firstName, String middleName, String lastName, String id, Dimension avatarBeforeSize) {
+    private void saveEmployeeData(String firstName, String lastName, String id, Dimension avatarBeforeSize) {
         testContext.getScenarioContext().setDataMap("firstName", firstName);
-        testContext.getScenarioContext().setDataMap("middleName", middleName);
         testContext.getScenarioContext().setDataMap("lastName", lastName);
         testContext.getScenarioContext().setDataMap("id", id);
         testContext.getScenarioContext().setDataMap("avatarBeforeSize", avatarBeforeSize);
@@ -30,12 +29,12 @@ public class AddEmployeeSteps {
         addEmployeePage = employeeListPage.openAddEmployeePage();
     }
 
-    @When("the admin enters the employee name {string} {string} {string} and uploads the avatar {string}")
-    public void theAdminEntersTheEmployeeNameAndUploadsTheAvatar(String firstName, String middleName, String lastName, String avatar) {
+    @When("the admin enters the employee name {string} {string} and uploads the avatar {string}")
+    public void theAdminEntersTheEmployeeNameAndUploadsTheAvatar(String firstName, String lastName, String avatar) {
         Dimension avatarBeforeSize = addEmployeePage.getAvatarSize();
         String employeeId = addEmployeePage.getEmployeeIdTextbox();
-        addEmployeePage.enterEmployeeDetails(firstName, middleName, lastName, avatar);
-        saveEmployeeData(firstName, middleName, lastName, employeeId, avatarBeforeSize);
+        addEmployeePage.enterEmployeeDetails(firstName, lastName, avatar);
+        saveEmployeeData(firstName, lastName, employeeId, avatarBeforeSize);
     }
 
     @And("clicks the Save button on the Add Employee page")
