@@ -14,7 +14,7 @@ public class EmployeeListPO extends SidebarPO {
     }
 
     public AddEmployeePO openAddEmployeePage() {
-        sleep(1);
+        sleep(2);
         clickElement(driver, EmployeeListPUI.ADD_EMPLOYEE_LINK);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getAddEmployeePage(driver);
