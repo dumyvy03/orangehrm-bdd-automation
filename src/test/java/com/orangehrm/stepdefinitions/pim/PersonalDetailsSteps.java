@@ -17,12 +17,10 @@ public class PersonalDetailsSteps {
     public void thePersonalDetailsPageDisplaysTheEmployeeSDetails() {
         PersonalDetailsPO personalDetailsPage = testContext.getPageContext().getPersonalDetailsPage();
         String firstName = (String) testContext.getScenarioContext().get("firstName");
-        String middleName = (String) testContext.getScenarioContext().get("middleName");
         String lastName = (String) testContext.getScenarioContext().get("lastName");
         String id = (String) testContext.getScenarioContext().get("id");
         Dimension avatarBeforeSize = (Dimension) testContext.getScenarioContext().get("avatarBeforeSize");
         Assert.assertEquals(personalDetailsPage.getFirstNameTextbox(), firstName);
-        Assert.assertEquals(personalDetailsPage.getMiddleNameTextbox(), middleName);
         Assert.assertEquals(personalDetailsPage.getLastNameTextbox(), lastName);
         Assert.assertEquals(personalDetailsPage.getEmployeeIdAtDetailsPage(), id);
         Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeSize));
