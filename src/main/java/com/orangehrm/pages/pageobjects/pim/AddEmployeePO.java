@@ -28,7 +28,6 @@ public class AddEmployeePO extends BasePage {
     }
 
     private void uploadAvatar(String avatar) {
-
         handleFileUpload(driver, avatar);
         sleep(1);
     }
@@ -39,13 +38,13 @@ public class AddEmployeePO extends BasePage {
         uploadAvatar(avatar);
     }
 
-    public PersonalDetailsPO clickSaveButton() {
+    public PersonalDetailsPO clickSaveButtonAddEmployee() {
         clickElement(driver, AddEmployeePUI.SAVE_BUTTON_ADD_EMPLOYEE);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getPersonalDetailsPage(driver);
     }
 
-    public String getEmployeeIdTextbox() {
+    public String getEmployeeIdValue() {
         return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
     }
 }
