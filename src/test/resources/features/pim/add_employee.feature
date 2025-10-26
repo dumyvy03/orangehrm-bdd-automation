@@ -10,7 +10,7 @@ Feature: Add new employee
   @valid
   Scenario Outline: Add employee with valid data
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the Personal Details page displays the employee’s details
 
     Examples:
@@ -20,7 +20,7 @@ Feature: Add new employee
   @empty_firstname
   Scenario Outline: Add employee with empty firstname
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Required"
 
     Examples:
@@ -30,7 +30,7 @@ Feature: Add new employee
   @invalid_firstname
   Scenario Outline: Add employee with firstname containing special characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "First Name must contain only letters"
 
     Examples:
@@ -40,7 +40,7 @@ Feature: Add new employee
   @exceed_30_chars_firstname
   Scenario Outline: Add employee with firstname exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Should not exceed 30 characters"
 
     Examples:
@@ -50,7 +50,7 @@ Feature: Add new employee
   @empty_lastname
   Scenario Outline: Add employee with empty firstname
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Required"
 
     Examples:
@@ -60,7 +60,7 @@ Feature: Add new employee
   @invalid_lastname
   Scenario Outline: Add employee with lastname containing special characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Last Name must contain only letters"
 
     Examples:
@@ -70,7 +70,7 @@ Feature: Add new employee
   @exceed_30_chars_lastname
   Scenario Outline: Add employee with lastname exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Should not exceed 30 characters"
 
     Examples:
@@ -80,7 +80,7 @@ Feature: Add new employee
   @exceed_avatar_size
   Scenario Outline: Add employee with avatar exceeding the allowed size
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "Attachment Size Exceeded"
 
     Examples:
@@ -90,7 +90,7 @@ Feature: Add new employee
   @invalid_avatar_format
   Scenario Outline: Add employee with invalid avatar format
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button on the Add Employee page
+    And clicks the Save button to add a new employee
     Then the system should display the field error message "File type not allowed"
 
     Examples:
