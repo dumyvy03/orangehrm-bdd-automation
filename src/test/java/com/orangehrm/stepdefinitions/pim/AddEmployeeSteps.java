@@ -1,45 +1,51 @@
 package com.orangehrm.stepdefinitions.pim;
 
+import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
-import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
 import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.Dimension;
+import org.testng.Assert;
 
 public class AddEmployeeSteps {
     private final TestContext testContext;
     private AddEmployeePO addEmployeePage;
+    String firstName, lastName, employeeId;
+    Dimension avatarBeforeSize;
+    private PersonalDetailsPO personalDetailsPage;
 
     public AddEmployeeSteps(TestContext testContext) {
         this.testContext = testContext;
     }
 
-    private void saveEmployeeData(String firstName, String lastName, String id, Dimension avatarBeforeSize) {
-        testContext.getScenarioContext().setDataMap("firstName", firstName);
-        testContext.getScenarioContext().setDataMap("lastName", lastName);
-        testContext.getScenarioContext().setDataMap("id", id);
-        testContext.getScenarioContext().setDataMap("avatarBeforeSize", avatarBeforeSize);
-    }
-
     @And("navigates to the Add New Employee page")
     public void navigatesToTheAddNewEmployeePage() {
-        EmployeeListPO employeeListPage = testContext.getPageContext().getDashboardPage().openPIMPage();
-        addEmployeePage = employeeListPage.openAddEmployeePage();
+        addEmployeePage = PageGenerator.getEmployeeListPage(testContext.getDriver()).openAddEmployeePage();
     }
 
     @When("the admin enters the employee name {string} {string} and uploads the avatar {string}")
     public void theAdminEntersTheEmployeeNameAndUploadsTheAvatar(String firstName, String lastName, String avatar) {
-        Dimension avatarBeforeSize = addEmployeePage.getAvatarSize();
-        String employeeId = addEmployeePage.getEmployeeIdTextbox();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.employeeId = addEmployeePage.getEmployeeIdValue();
+        testContext.getScenarioContext().setDataMap("employeeId", employeeId);
+        this.avatarBeforeSize = addEmployeePage.getAvatarSize();
         addEmployeePage.enterEmployeeDetails(firstName, lastName, avatar);
-        saveEmployeeData(firstName, lastName, employeeId, avatarBeforeSize);
     }
 
-    @And("clicks the Save button on the Add Employee page")
-    public void clicksTheSaveButtonOnTheAddEmployeePage() {
-        PersonalDetailsPO personalDetailsPage = addEmployeePage.clickSaveButton();
-        testContext.getPageContext().setPersonalDetailsPage(personalDetailsPage);
+    @And("clicks the Save button to add a new employee")
+    public void clicksTheSaveButtonToAddANewEmployee() {
+        personalDetailsPage = addEmployeePage.clickSaveButtonAddEmployee();
+    }
+
+    @Then("the Personal Details page displays the employee’s details")
+    public void verifyEmployeeDetailsDisplayed() {
+        Assert.assertEquals(personalDetailsPage.getFirstName(), firstName);
+        Assert.assertEquals(personalDetailsPage.getLastName(), lastName);
+        Assert.assertEquals(personalDetailsPage.getEmployeeIdAtDetailsPage(), employeeId);
+        Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeSize));
     }
 }
