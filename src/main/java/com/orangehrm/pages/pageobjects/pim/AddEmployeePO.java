@@ -38,7 +38,7 @@ public class AddEmployeePO extends BasePage {
         uploadAvatar(avatar);
     }
 
-    public PersonalDetailsPO clickSaveButtonAddEmployee() {
+    public PersonalDetailsPO clickSaveButton() {
         clickElement(driver, AddEmployeePUI.SAVE_BUTTON_ADD_EMPLOYEE);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getPersonalDetailsPage(driver);
@@ -46,5 +46,17 @@ public class AddEmployeePO extends BasePage {
 
     public String getEmployeeIdValue() {
         return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
+    }
+
+    public String getFristNameErrorMessage() {
+        return getTextElement(driver, AddEmployeePUI.FIRSTNAME_ERROR_MESSAGE);
+    }
+
+    public String getLastNameErrorMessage() {
+        return getTextElement(driver, AddEmployeePUI.LASTNAME_ERROR_MESSAGE);
+    }
+
+    public String getAvatarErrorMessage() {
+        return getTextElement(driver, AddEmployeePUI.AVATAR_ERROR_MESSAGE);
     }
 }
