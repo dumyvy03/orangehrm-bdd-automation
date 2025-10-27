@@ -1,17 +1,16 @@
 package com.orangehrm.pages.pageobjects.dashboard;
 
-import com.orangehrm.pages.pageobjects.commons.SidebarPO;
+import com.orangehrm.commons.BasePage;
 import com.orangehrm.pages.pageuis.dashboard.DashboardPUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class DashboardPO extends SidebarPO {
+public class DashboardPO extends BasePage {
     private final WebDriver driver;
 
     public DashboardPO(WebDriver driver) {
-        super(driver);
         this.driver = driver;
     }
 
