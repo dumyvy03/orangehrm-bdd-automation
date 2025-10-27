@@ -11,11 +11,10 @@ public class ChangeProfilePicturePO extends EmployeeNavigationPO {
         this.driver = driver;
     }
 
-    public PersonalDetailsPO uploadAvatar(String avatarPath) {
+    public void uploadAvatar(String avatarPath) {
         handleFileUpload(driver, avatarPath);
         sleep(2);
         clickElement(driver, ChangeProfilePicturePUI.SAVE_PROFILE_PICTURE_BUTTON);
         waitForLoadingIconInvisible(driver);
-        return openPersonalDetailsPage();
     }
 }
