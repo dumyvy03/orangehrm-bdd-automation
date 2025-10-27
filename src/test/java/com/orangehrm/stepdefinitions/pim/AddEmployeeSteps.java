@@ -22,12 +22,12 @@ public class AddEmployeeSteps {
     }
 
     @And("navigates to the Add New Employee page")
-    public void navigatesToTheAddNewEmployeePage() {
+    public void navigatesToAddNewEmployeePage() {
         addEmployeePage = PageGenerator.getEmployeeListPage(testContext.getDriver()).openAddEmployeePage();
     }
 
     @When("the admin enters the employee name {string} {string} and uploads the avatar {string}")
-    public void theAdminEntersTheEmployeeNameAndUploadsTheAvatar(String firstName, String lastName, String avatar) {
+    public void entersEmployeeNameAndUploadsAvatar(String firstName, String lastName, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.employeeId = addEmployeePage.getEmployeeIdValue();
@@ -37,8 +37,8 @@ public class AddEmployeeSteps {
     }
 
     @And("clicks the Save button to add a new employee")
-    public void clicksTheSaveButtonToAddANewEmployee() {
-        personalDetailsPage = addEmployeePage.clickSaveButtonAddEmployee();
+    public void clicksSaveButton() {
+        personalDetailsPage = addEmployeePage.clickSaveButton();
     }
 
     @Then("the Personal Details page displays the employee’s details")
@@ -47,5 +47,23 @@ public class AddEmployeeSteps {
         Assert.assertEquals(personalDetailsPage.getLastName(), lastName);
         Assert.assertEquals(personalDetailsPage.getEmployeeIdAtDetailsPage(), employeeId);
         Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeSize));
+    }
+
+    @Then("the firstname field shows error {string}")
+    public void verifyFirstNameErrorMessage(String errorMessage) {
+        Assert.assertEquals(addEmployeePage.getFristNameErrorMessage(), errorMessage);
+        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
+    }
+
+    @Then("the lastname field shows error {string}")
+    public void verifyLastNamedErrorMessage(String errorMessage) {
+        Assert.assertEquals(addEmployeePage.getLastNameErrorMessage(), errorMessage);
+        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
+    }
+
+    @Then("the avatar field shows error {string}")
+    public void verifyAvatarFieldShowsError(String errorMessage) {
+        Assert.assertEquals(addEmployeePage.getAvatarErrorMessage(), errorMessage);
+        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
     }
 }
