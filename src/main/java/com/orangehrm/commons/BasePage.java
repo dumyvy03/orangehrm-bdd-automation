@@ -1,7 +1,7 @@
 package com.orangehrm.commons;
 
 
-import com.orangehrm.pages.pageuis.commons.BasePUI;
+import com.orangehrm.pages.pageuis.BasePUI;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -65,6 +65,17 @@ public class BasePage {
         getElement(driver, locatorExpression).sendKeys(value);
     }
 
+    public void selectDropdownCustomer(WebDriver driver, String parentLocatorExpression, String childLocatorExpression, String value) {
+        waitForElementClickable(driver, parentLocatorExpression);
+        getElement(driver, parentLocatorExpression).click();
+        List<WebElement> elements = getElements(driver, childLocatorExpression);
+        for (WebElement element : elements) {
+            if (element.getText().equals(value)) {
+                element.click();
+                break;
+            }
+        }
+    }
 
     /* ================================================
        3. GETTERS (text, attribute, size, css, etc.)
@@ -103,45 +114,60 @@ public class BasePage {
         });
     }
 
+    public boolean isElementSelected(WebDriver driver, String locatorExpression, String... params) {
+        waitForElementSelected(driver, locatorExpression, params);
+        return getElement(driver, formatLocator(locatorExpression, params)).isSelected();
+    }
 
     /* ================================================
         5. JAVASCRIPT UTILITIES
         ================================================= */
-    public void scrollIntoView(WebDriver driver, String locatorExpression, String... params) {
-        waitForElementVisible(driver, formatLocator(locatorExpression, params));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
-                getElement(driver, formatLocator(locatorExpression, params)));
+    public void checkElementByJS(WebDriver driver, String locatorExpression, String... params) {
+        WebElement element = getElement(driver, formatLocator(locatorExpression, params));
+        if (!element.isSelected()) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+                    getElement(driver, formatLocator(locatorExpression, params)));
+        }
     }
+
+    public void scrollPageToBottomByJS(WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
 
     /* ================================================
       6. WAIT HANDLERS
       ================================================= */
     public void waitForElementVisible(WebDriver driver, String locatorExpression) {
-        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).
-                until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locatorExpression)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locatorExpression)));
     }
 
-
     public void waitListForElementsVisible(WebDriver driver, String locatorExpression) {
-        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).
-                until(ExpectedConditions.visibilityOfAllElements(getElements(driver, locatorExpression)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfAllElements(getElements(driver, locatorExpression)));
     }
 
 
     public void waitForElementPresence(WebDriver driver, String locatorExpression) {
-        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).
-                until(ExpectedConditions.presenceOfElementLocated(getByLocator(locatorExpression)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.presenceOfElementLocated(getByLocator(locatorExpression)));
     }
 
     public void waitForElementClickable(WebDriver driver, String locatorExpression) {
-        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).
-                until(ExpectedConditions.elementToBeClickable(getByLocator(locatorExpression)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.elementToBeClickable(getByLocator(locatorExpression)));
     }
 
 
     public void waitForElementInVisible(WebDriver driver, String locatorExpression) {
-        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)).
-                until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorExpression)));
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locatorExpression)));
+    }
+
+    public void waitForElementSelected(WebDriver driver, String locatorExpression, String... params) {
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.elementToBeSelected(getByLocator(formatLocator(locatorExpression, params))));
     }
 
     public void waitForLoadingIconInvisible(WebDriver driver) {
@@ -150,7 +176,7 @@ public class BasePage {
 
 
     /* ================================================
-        8. FILE HANDLING
+        8. TIME METHODS
         ================================================= */
     private void overrideImplicitTimeout(WebDriver driver, long timeoutSeconds) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeoutSeconds));
@@ -165,7 +191,7 @@ public class BasePage {
     }
 
     /* ================================================
-        8. FILE HANDLING
+        9. FILE HANDLING
         ================================================= */
     public void handleFileUpload(WebDriver driver, String... fileNames) {
         String filePath = GlobalConstants.UPLOAD_PATH;
