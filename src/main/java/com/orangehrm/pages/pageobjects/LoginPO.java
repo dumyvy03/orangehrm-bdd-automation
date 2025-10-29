@@ -1,16 +1,15 @@
 package com.orangehrm.pages.pageobjects;
 
+import com.orangehrm.commons.BasePage;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageobjects.commons.CommonPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
 import com.orangehrm.pages.pageuis.LoginPUI;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPO extends CommonPO {
+public class LoginPO extends BasePage {
     private final WebDriver driver;
 
     public LoginPO(WebDriver driver) {
-        super(driver);
         this.driver = driver;
     }
 
@@ -21,19 +20,16 @@ public class LoginPO extends CommonPO {
     }
 
     private void enterUserNameTextbox(String username) {
-        waitForElementVisible(driver, LoginPUI.USERNAME_TEXTBOX);
         sendKeysElement(driver, LoginPUI.USERNAME_TEXTBOX, username);
         sleep(1);
     }
 
     private void enterPasswordTextbox(String password) {
-        waitForElementVisible(driver, LoginPUI.PASSWORD_TEXTBOX);
         sendKeysElement(driver, LoginPUI.PASSWORD_TEXTBOX, password);
         sleep(1);
     }
 
     public DashboardPO clickLoginButton() {
-        waitForElementClickable(driver, LoginPUI.LOGIN_BUTTON);
         clickElement(driver, LoginPUI.LOGIN_BUTTON);
         return PageGenerator.getDashboardPage(driver);
     }
@@ -44,9 +40,14 @@ public class LoginPO extends CommonPO {
     }
 
     public String getLoginErrorMessage() {
-        waitForElementVisible(driver, LoginPUI.LOGIN_ERROR_TEXT);
-        sleep(1);
         return getTextElement(driver, LoginPUI.LOGIN_ERROR_TEXT);
     }
 
+    public String getUsernameErrorMessage() {
+        return getTextElement(driver, LoginPUI.USERNAME_ERROR_MESSAGE);
+    }
+
+    public String getPasswordErrorMessage() {
+        return getTextElement(driver, LoginPUI.PASSWORD_ERROR_MESSAGE);
+    }
 }
