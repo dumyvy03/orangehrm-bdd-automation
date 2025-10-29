@@ -1,9 +1,9 @@
 package com.orangehrm.stepdefinitions;
 
 import com.orangehrm.commons.PageGenerator;
+import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.LoginPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
-import com.orangehrm.context.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,13 +36,23 @@ public class LoginSteps {
         dashboardPage = loginPage.clickLoginButton();
     }
 
-    @Then("the system should redirect to the admin dashboard")
-    public void theSystemShouldRedirectToTheAdminDashboard() {
+    @Then("the system redirects to the admin dashboard")
+    public void verifyAdminDashboardDisplayed() {
         Assert.assertTrue(dashboardPage.isDashboardVisible());
     }
 
-    @Then("the system should display the login error message {string}")
-    public void theSystemShouldDisplayTheLoginErrorMessage(String errorMessage) {
+    @Then("the system displays the login error message {string}")
+    public void verifyLoginErrorMessage(String errorMessage) {
         Assert.assertEquals(loginPage.getLoginErrorMessage(), errorMessage);
+    }
+
+    @Then("the username field shows error {string}")
+    public void verifyUsernameErrorMessage(String errorMessage) {
+        Assert.assertEquals(loginPage.getUsernameErrorMessage(), errorMessage);
+    }
+
+    @Then("the password field shows error {string}")
+    public void verifyPasswordShowsError(String errorMessage) {
+        Assert.assertEquals(loginPage.getPasswordErrorMessage(), errorMessage);
     }
 }
