@@ -12,25 +12,22 @@ import org.openqa.selenium.WebDriver;
 public class TestContext {
     private final DriverFactory driverFactory;
     private WebDriver driver;
-    private PageContext pageContext;
     private ScenarioContext scenarioContext;
     private EmployeeCleanupHelper employeeCleanupHelper;
 
     public TestContext(DriverFactory driverFactory) {
         this.driverFactory = driverFactory;
-        pageContext = new PageContext();
-        scenarioContext = new ScenarioContext();
     }
 
     public void init(String browserName) {
         driver = driverFactory.getDriver(browserName);
+        scenarioContext = new ScenarioContext();
     }
 
     public void quit() {
         try {
             if (driverFactory != null) {
                 driverFactory.quitDriver();
-                driver = null;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
