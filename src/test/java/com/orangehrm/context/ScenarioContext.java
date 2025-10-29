@@ -2,6 +2,7 @@ package com.orangehrm.context;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class ScenarioContext {
     private final Map<String, Object> dataMap;
@@ -14,11 +15,8 @@ public class ScenarioContext {
         dataMap.put(key, value);
     }
 
-    public Object get(String key) {
-        if (!dataMap.containsKey(key)) {
-            throw new IllegalArgumentException("No value found for key: " + key);
-        }
-        return dataMap.get(key);
+    public Optional<Object> getOptional(String key) {
+        return Optional.ofNullable(dataMap.get(key));
     }
 
     public boolean containsKey(String key) {
