@@ -1,12 +1,12 @@
 package com.orangehrm.commons;
 
 import com.orangehrm.pages.pageobjects.LoginPO;
-import com.orangehrm.pages.pageobjects.commons.CommonPO;
+import com.orangehrm.pages.pageobjects.SidebarPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
 import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
+import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
 import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
 import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
-import com.orangehrm.pages.pageobjects.recruitment.RecruitmentPO;
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
@@ -23,10 +23,6 @@ public class PageGenerator {
         return new EmployeeListPO(driver);
     }
 
-    public static RecruitmentPO getRecruitmentPage(WebDriver driver) {
-        return new RecruitmentPO(driver);
-    }
-
     public static AddEmployeePO getAddEmployeePage(WebDriver driver) {
         return new AddEmployeePO(driver);
     }
@@ -35,8 +31,12 @@ public class PageGenerator {
         return new PersonalDetailsPO(driver);
     }
 
-    public static CommonPO getCommonPage(WebDriver driver) {
-        return new CommonPO(driver);
+    public static SidebarPO getSidebarPage(WebDriver driver) {
+        return new SidebarPO(driver);
+    }
+
+    public static ChangeProfilePicturePO getChangeProfilePicturePage(WebDriver driver) {
+        return new ChangeProfilePicturePO(driver);
     }
 
 }
