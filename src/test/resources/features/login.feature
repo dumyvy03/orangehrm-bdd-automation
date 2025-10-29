@@ -10,31 +10,40 @@ Feature: Admin login
   Scenario Outline: Login with valid data
     When the admin enters username "<username>" and password "<password>"
     And clicks the Login button
-    Then the system should redirect to the admin dashboard
+    Then the system redirects to the admin dashboard
 
     Examples:
       | username | password   |
       | admin    | Admin@1234 |
 
-  @invalid
+  @negative
   Scenario Outline: Login with invalid data
     When the admin enters username "<username>" and password "<password>"
     And clicks the Login button
-    Then the system should display the login error message "Invalid credentials"
+    Then the system displays the login error message "Invalid credentials"
 
     Examples:
       | username | password   |
       | admin    | admin@     |
       | ad       | Admin@1234 |
 
-  @empty_fields
-  Scenario Outline: Login with empty fields
+  @negative
+  Scenario Outline: Login with empty username
     When the admin enters username "<username>" and password "<password>"
     And clicks the Login button
-    Then the system should display the field error message "Required"
+    Then the username field shows error "Required"
 
     Examples:
       | username | password   |
-      | admin    |            |
       |          | Admin@1234 |
+
+  @negative
+  Scenario Outline: Login with empty password
+    When the admin enters username "<username>" and password "<password>"
+    And clicks the Login button
+    Then the password field shows error "Required"
+
+    Examples:
+      | username | password |
+      | admin    |          |
 
