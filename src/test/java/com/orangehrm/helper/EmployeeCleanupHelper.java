@@ -1,8 +1,9 @@
 package com.orangehrm.helper;
 
+import com.orangehrm.commons.PageGenerator;
+import com.orangehrm.context.ScenarioContext;
 import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
-import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
 import org.testng.Assert;
 
 public class EmployeeCleanupHelper {
@@ -13,13 +14,12 @@ public class EmployeeCleanupHelper {
     }
 
     public void cleanupTestEmployeeIfExists() {
-        PersonalDetailsPO personalDetailsPage = testContext.getPageContext().getPersonalDetailsPage();
-        String employeeId = (String) testContext.getScenarioContext().get("id");
-        if (personalDetailsPage != null && employeeId != null && !employeeId.isEmpty()) {
-            EmployeeListPO employeeListPage = personalDetailsPage.openPIMPage();
-            employeeListPage.clickDeleteEmployeeButton(employeeId);
+        ScenarioContext scenarioContext = testContext.getScenarioContext();
+        scenarioContext.getOptional("employeeId").ifPresent(employeeId -> {
+            EmployeeListPO employeeListPage = PageGenerator.getSidebarPage(testContext.getDriver()).openPIMPage();
+            employeeListPage.clickDeleteEmployeeButton(employeeId.toString());
             employeeListPage.clickConfirmDeleteButton();
-            Assert.assertTrue(employeeListPage.isEmployeeDeleted(employeeId));
-        }
+            Assert.assertTrue(employeeListPage.isEmployeeDeleted(employeeId.toString()));
+        });
     }
 }
