@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis;
+package com.orangehrm.pages.pageuis.login;
 
 public class LoginPUI {
     public static final String USERNAME_TEXTBOX = "Name=username";
