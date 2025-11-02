@@ -18,7 +18,6 @@ public class EditEmployeeSteps {
     private final TestContext testContext;
     private EmployeeListPO employeeListPage;
     private PersonalDetailsPO personalDetailsPage;
-    private ChangeProfilePicturePO changeProfilePicturePage;
 
     String firstName, lastName, driverLicense, licenseExpiryDate, nationality, maritalStatus, dateOfBirth, gender;
     Dimension avatarBeforeUploadSize;
@@ -32,10 +31,9 @@ public class EditEmployeeSteps {
         employeeListPage = PageGenerator.getSidebarPage(testContext.getDriver()).openPIMPage();
     }
 
-    @When("the admin searches by {string} and {string}")
-    public void theAdminSearchesByAnd(String employeeName, String subUnit) {
-        employeeListPage.enterEmployeeNameTextbox(employeeName);
-        employeeListPage.selectSubUnitDropdown(subUnit);
+    @When("the admin searches by employee id {string}")
+    public void theAdminSearchesByEmployeeId(String employeeId) {
+        employeeListPage.enterEmployeeIdTextbox(employeeId);
     }
 
     @And("the admin clicks the Search button")
@@ -43,23 +41,20 @@ public class EditEmployeeSteps {
         employeeListPage.clickSearchButton();
     }
 
-    @And("clicks Edit button for {string} in results list")
-    public void clicksEditButtonForInResultsList(String employeeId) {
-        personalDetailsPage = employeeListPage.clickEditButtonEmployeeList(employeeId);
-    }
-
-    @And("the admin uploads avatar {string}")
-    public void theAdminUploadsAvatar(String avatarPath) {
-        avatarBeforeUploadSize = personalDetailsPage.getAvatarSize();
-        changeProfilePicturePage = personalDetailsPage.openChangeProfilePicturePage();
-        changeProfilePicturePage.uploadAvatar(avatarPath);
-
+    @And("clicks Edit button in search results")
+    public void clicksEditButton() {
+        personalDetailsPage = employeeListPage.clickEditButtonEmployeeList();
     }
 
     @And("the admin updates personal details")
     public void updatesEmployeeInformation(DataTable dataTable) {
-        personalDetailsPage = changeProfilePicturePage.openPersonalDetailsPage();
         Map<String, String> updatedData = dataTable.asMap(String.class, String.class);
+        String avatarPath = updatedData.get("Avatar");
+        avatarBeforeUploadSize = personalDetailsPage.getAvatarSize();
+        ChangeProfilePicturePO changeProfilePicturePage = personalDetailsPage.openChangeProfilePicturePage();
+        changeProfilePicturePage.uploadAvatar(avatarPath);
+        personalDetailsPage = changeProfilePicturePage.openPersonalDetailsPage();
+
         firstName = updatedData.get("First Name");
         lastName = updatedData.get("Last Name");
         driverLicense = updatedData.get("Driver's License Number");
@@ -79,7 +74,7 @@ public class EditEmployeeSteps {
         personalDetailsPage.selectGenderRadioButton(gender);
     }
 
-    @And("the admin clicks the Save button to update personal details")
+    @And("clicks the Save button to update")
     public void theAdminClicksTheSaveButtonToUpdate() {
         personalDetailsPage.clickSaveButtonPersonalDetails();
     }
@@ -97,4 +92,29 @@ public class EditEmployeeSteps {
         Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeUploadSize));
     }
 
+    @And("the admin updates license expiry date {string}")
+    public void theAdminUpdatesLicenseExpiryDate(String licenseExpiryDate) {
+        personalDetailsPage.enterLicenseExpiryDateTextbox(licenseExpiryDate);
+    }
+
+    @And("the admin updates date of birth {string}")
+    public void theAdminUpdatesDateOfBirth(String dateOfBirth) {
+        personalDetailsPage.enterDateOfBirthTextbox(dateOfBirth);
+    }
+
+    @And("the admin updates first name empty {string}")
+    public void theAdminUpdatesFirstNameEmpty(String firstName) {
+        personalDetailsPage.enterFirstNameTextbox(firstName);
+    }
+
+    @Then("the license expiry date field shows error {string}")
+    public void verifyLicenseExpiryDateFieldShowsError(String errorMessage) {
+        Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateErrorMessage(), errorMessage);
+    }
+
+
+    @Then("the date of birth field shows error {string}")
+    public void verifyDateOfBirthFieldShowsError(String errorMessage) {
+        Assert.assertEquals(personalDetailsPage.getDateOfBirthErrorMessage(), errorMessage);
+    }
 }
