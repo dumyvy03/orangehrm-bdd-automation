@@ -22,7 +22,7 @@ public class EmployeeListPO extends BasePage {
     public void clickDeleteEmployeeButton(String employeeID) {
         scrollPageToBottomByJS(driver);
         sleep(1);
-        clickElement(driver, EmployeeListPUI.DYNAMIC_DELETE_BUTTON_BY_ID, employeeID);
+        clickElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID, employeeID);
     }
 
     public void clickConfirmDeleteButton() {
@@ -32,17 +32,7 @@ public class EmployeeListPO extends BasePage {
 
     public boolean isEmployeeDeleted(String employeeID) {
         waitForLoadingIconInvisible(driver);
-        return isElementUnDisplayed(driver, EmployeeListPUI.DYNAMIC_EMPLOYEE_ID, employeeID);
-    }
-
-    public void enterEmployeeNameTextbox(String employeeName) {
-        sleep(3);
-        sendKeysElement(driver, EmployeeListPUI.EMPLOYEE_NAME_TEXTBOX, employeeName);
-    }
-
-    public void selectSubUnitDropdown(String subUnit) {
-        sleep(2);
-        selectDropdownCustomer(driver, EmployeeListPUI.SUB_UNIT_DROPDOWN_PARENT, EmployeeListPUI.SUB_UNIT_DROPDOWN_CHILD, subUnit);
+        return isElementUnDisplayed(driver, EmployeeListPUI.EMPLOYEE_ID_IN_EMPLOYEE_TABLE, employeeID);
     }
 
     public void clickSearchButton() {
@@ -50,11 +40,15 @@ public class EmployeeListPO extends BasePage {
         clickElement(driver, EmployeeListPUI.SEARCH_BUTTON);
     }
 
-    public PersonalDetailsPO clickEditButtonEmployeeList(String employeeId) {
+    public PersonalDetailsPO clickEditButtonEmployeeList() {
         scrollPageToBottomByJS(driver);
         sleep(1);
-        clickElement(driver, EmployeeListPUI.DYNAMIC_EDIT_BUTTON_BY_ID, employeeId);
+        clickElement(driver, EmployeeListPUI.EDIT_BUTTON);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getPersonalDetailsPage(driver);
+    }
+
+    public void enterEmployeeIdTextbox(String employeeId) {
+        sendKeysElement(driver, EmployeeListPUI.EMPLOYEE_ID_SEARCH_TEXTBOX, employeeId);
     }
 }
