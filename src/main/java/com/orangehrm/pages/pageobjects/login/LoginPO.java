@@ -1,9 +1,9 @@
-package com.orangehrm.pages.pageobjects;
+package com.orangehrm.pages.pageobjects.login;
 
 import com.orangehrm.commons.BasePage;
 import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
-import com.orangehrm.pages.pageuis.LoginPUI;
+import com.orangehrm.pages.pageuis.login.LoginPUI;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPO extends BasePage {
