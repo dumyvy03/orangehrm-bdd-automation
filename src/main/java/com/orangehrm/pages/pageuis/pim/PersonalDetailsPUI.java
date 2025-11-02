@@ -26,4 +26,9 @@ public class PersonalDetailsPUI {
     public static final String GENDER_RADIO_BUTTON = "Xpath=//label[text()='Gender']/parent::div/following-sibling::div//label[normalize-space(.)='%s']//input";
 
     public static final String SAVE_PERSONAL_DETAILS_BUTTON = "Xpath=//h6[text()='Personal Details']/following-sibling::form//button[normalize-space(.)='Save']";
+
+    public static final String LICENSE_EXPIRY_DATE_ERROR_TEXT = "Xpath=//label[text()='License Expiry Date']/parent::div/following-sibling::span";
+
+    public static final String DATE_OF_BIRTH_ERROR_TEXT = "Xpath=//label[text()='Date of Birth']/parent::div/following-sibling::span";
+    
 }
