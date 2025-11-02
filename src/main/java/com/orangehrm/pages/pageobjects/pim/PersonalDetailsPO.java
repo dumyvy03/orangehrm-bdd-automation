@@ -107,4 +107,13 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
     public Dimension getAvatarSize() {
         return getElementSize(driver, PersonalDetailsPUI.EMPLOYEE_AVATAR);
     }
+
+    public String getLicenseExpiryDateErrorMessage() {
+        return getTextElement(driver, PersonalDetailsPUI.LICENSE_EXPIRY_DATE_ERROR_TEXT);
+    }
+
+    public String getDateOfBirthErrorMessage() {
+        return getTextElement(driver, PersonalDetailsPUI.DATE_OF_BIRTH_ERROR_TEXT);
+    }
+    
 }
