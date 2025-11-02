@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis;
+package com.orangehrm.pages.pageuis.commons;
 
 public class BasePUI {
     public static final String LOADING_ICON = "Css=div.oxd-loading-spinner";
