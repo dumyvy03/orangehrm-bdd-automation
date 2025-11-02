@@ -1,8 +1,8 @@
-package com.orangehrm.stepdefinitions;
+package com.orangehrm.stepdefinitions.login;
 
 import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.context.TestContext;
-import com.orangehrm.pages.pageobjects.LoginPO;
+import com.orangehrm.pages.pageobjects.login.LoginPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
