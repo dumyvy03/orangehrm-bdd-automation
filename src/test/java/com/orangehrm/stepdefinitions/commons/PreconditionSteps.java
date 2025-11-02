@@ -2,15 +2,15 @@ package com.orangehrm.stepdefinitions.commons;
 
 import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.context.TestContext;
-import com.orangehrm.pages.pageobjects.LoginPO;
+import com.orangehrm.pages.pageobjects.login.LoginPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
 import io.cucumber.java.en.Given;
 import org.testng.Assert;
 
-public class CommonSteps {
+public class PreconditionSteps {
     private final TestContext testContext;
 
-    public CommonSteps(TestContext testContext) {
+    public PreconditionSteps(TestContext testContext) {
         this.testContext = testContext;
     }
 
