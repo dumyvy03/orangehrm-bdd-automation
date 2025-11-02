@@ -18,60 +18,60 @@ Feature: Add new employee
       | John      | Doe      | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with empty firstname
+  Scenario Outline: Add employee with empty first name
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the firstname field shows error "Required"
+    Then the first name field shows error "Required"
 
     Examples:
       | firstname | lastname | avatar   |
       |           | Doe      | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with firstname containing special characters
+  Scenario Outline: Add employee with first name containing special characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the firstname field shows error "First Name must contain only letters"
+    Then the first name field shows error "First Name must contain only letters"
 
     Examples:
       | firstname | lastname | avatar   |
       | John@#5   | Doe      | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with firstname exceeding 30 characters
+  Scenario Outline: Add employee with first name exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the firstname field shows error "Should not exceed 30 characters"
+    Then the first name field shows error "Should not exceed 30 characters"
 
     Examples:
       | firstname                         | lastname | avatar   |
       | JonathanEdwardMontgomeryAlexander | Doe      | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with empty lastname
+  Scenario Outline: Add employee with empty last name
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the lastname field shows error "Required"
+    Then the last name field shows error "Required"
 
     Examples:
       | firstname | lastname | avatar   |
       | John      |          | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with lastname containing special characters
+  Scenario Outline: Add employee with last name containing special characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the lastname field shows error "Last Name must contain only letters"
+    Then the last name field shows error "Last Name must contain only letters"
 
     Examples:
       | firstname | lastname | avatar   |
       | John      | Doe%$%76 | mori.jpg |
 
   @negative
-  Scenario Outline: Add employee with lastname exceeding 30 characters
+  Scenario Outline: Add employee with last name exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
     And clicks the Save button to add a new employee
-    Then the lastname field shows error "Should not exceed 30 characters"
+    Then the last name field shows error "Should not exceed 30 characters"
 
     Examples:
       | firstname | lastname                             | avatar   |
