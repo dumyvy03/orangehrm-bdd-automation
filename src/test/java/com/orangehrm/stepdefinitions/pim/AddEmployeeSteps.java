@@ -49,13 +49,7 @@ public class AddEmployeeSteps {
         Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeSize));
     }
 
-    @Then("the firstname field shows error {string}")
-    public void verifyFirstNameErrorMessage(String errorMessage) {
-        Assert.assertEquals(addEmployeePage.getFristNameErrorMessage(), errorMessage);
-        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
-    }
-
-    @Then("the lastname field shows error {string}")
+    @Then("the last name field shows error {string}")
     public void verifyLastNamedErrorMessage(String errorMessage) {
         Assert.assertEquals(addEmployeePage.getLastNameErrorMessage(), errorMessage);
         testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
