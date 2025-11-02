@@ -1,7 +1,8 @@
 package com.orangehrm.commons;
 
-import com.orangehrm.pages.pageobjects.LoginPO;
-import com.orangehrm.pages.pageobjects.SidebarPO;
+import com.orangehrm.pages.pageobjects.commons.ValidationPO;
+import com.orangehrm.pages.pageobjects.login.LoginPO;
+import com.orangehrm.pages.pageobjects.commons.SidebarPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
 import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
 import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
@@ -37,6 +38,10 @@ public class PageGenerator {
 
     public static ChangeProfilePicturePO getChangeProfilePicturePage(WebDriver driver) {
         return new ChangeProfilePicturePO(driver);
+    }
+
+    public static ValidationPO getValidationPage(WebDriver driver) {
+        return new ValidationPO(driver);
     }
 
 }
