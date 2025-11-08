@@ -40,7 +40,6 @@ Feature: Add new employee
   @negative
   Scenario Outline: Add employee with first name exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button to add a new employee
     Then the first name field shows error "Should not exceed 30 characters"
 
     Examples:
@@ -70,7 +69,6 @@ Feature: Add new employee
   @negative
   Scenario Outline: Add employee with last name exceeding 30 characters
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button to add a new employee
     Then the last name field shows error "Should not exceed 30 characters"
 
     Examples:
@@ -80,7 +78,6 @@ Feature: Add new employee
   @negative
   Scenario Outline: Add employee with avatar exceeding the allowed size
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button to add a new employee
     Then the avatar field shows error "Attachment Size Exceeded"
 
     Examples:
@@ -90,7 +87,6 @@ Feature: Add new employee
   @negative
   Scenario Outline: Add employee with invalid avatar format
     When the admin enters the employee name "<firstname>" "<lastname>" and uploads the avatar "<avatar>"
-    And clicks the Save button to add a new employee
     Then the avatar field shows error "File type not allowed"
 
     Examples:
