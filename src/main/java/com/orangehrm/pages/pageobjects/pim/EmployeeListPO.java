@@ -5,6 +5,8 @@ import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.pages.pageuis.pim.EmployeeListPUI;
 import org.openqa.selenium.WebDriver;
 
+import java.util.List;
+
 public class EmployeeListPO extends BasePage {
     private WebDriver driver;
 
@@ -20,7 +22,7 @@ public class EmployeeListPO extends BasePage {
     }
 
     public void clickDeleteEmployeeButton(String employeeID) {
-        scrollPageToBottomByJS(driver);
+        scrollToElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID);
         sleep(1);
         clickElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID, employeeID);
     }
@@ -41,7 +43,7 @@ public class EmployeeListPO extends BasePage {
     }
 
     public PersonalDetailsPO clickEditButtonEmployeeList() {
-        scrollPageToBottomByJS(driver);
+        scrollToElement(driver, EmployeeListPUI.EDIT_BUTTON);
         sleep(1);
         clickElement(driver, EmployeeListPUI.EDIT_BUTTON);
         waitForLoadingIconInvisible(driver);
@@ -49,6 +51,35 @@ public class EmployeeListPO extends BasePage {
     }
 
     public void enterEmployeeIdTextbox(String employeeId) {
+        sleep(1);
         sendKeysElement(driver, EmployeeListPUI.EMPLOYEE_ID_SEARCH_TEXTBOX, employeeId);
+    }
+
+    public void enterEmployeeNameTextbox(String employeeName) {
+        sleep(1);
+        sendKeysElement(driver, EmployeeListPUI.EMPLOYEE_NAME_TEXTBOX, employeeName);
+    }
+
+    public boolean isEmployeeDisplayed(String employeeName) {
+        scrollToElement(driver, EmployeeListPUI.FIRSTNAME_IN_EMPLOYEE_TABLE);
+        sleep(2);
+        List<String> firstNames = getElementsText(driver, EmployeeListPUI.FIRSTNAME_IN_EMPLOYEE_TABLE);
+        List<String> lastNames = getElementsText(driver, EmployeeListPUI.LASTNAME_IN_EMPLOYEE_TABLE);
+        for (int i = 0; i < firstNames.size(); i++) {
+            String firstName = firstNames.get(i).toLowerCase();
+            String lastName = lastNames.get(i).toLowerCase();
+            String fullName = (firstName + " " + lastName).toLowerCase();
+            if (firstName.contains(employeeName.trim().toLowerCase()) || lastName.contains(employeeName.trim().toLowerCase())
+                    || fullName.contains(employeeName.trim().toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getErrorSearchMessage() {
+        scrollToElement(driver, EmployeeListPUI.NO_RECORDS_FOUND_MESSAGE);
+        waitForLoadingIconInvisible(driver);
+        return getElementText(driver, EmployeeListPUI.NO_RECORDS_FOUND_MESSAGE);
     }
 }
