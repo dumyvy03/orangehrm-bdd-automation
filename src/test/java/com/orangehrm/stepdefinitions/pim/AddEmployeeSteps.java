@@ -23,7 +23,9 @@ public class AddEmployeeSteps {
 
     @And("navigates to the Add New Employee page")
     public void navigatesToAddNewEmployeePage() {
-        addEmployeePage = PageGenerator.getEmployeeListPage(testContext.getDriver()).openAddEmployeePage();
+        addEmployeePage = PageGenerator.getSidebarPage(testContext.getDriver())
+                .openPIMPage()
+                .openAddEmployeePage();
     }
 
     @When("the admin enters the employee name {string} {string} and uploads the avatar {string}")
@@ -43,10 +45,10 @@ public class AddEmployeeSteps {
 
     @Then("the Personal Details page displays the employee’s details")
     public void verifyEmployeeDetailsDisplayed() {
-        Assert.assertEquals(personalDetailsPage.getFirstName(), firstName);
-        Assert.assertEquals(personalDetailsPage.getLastName(), lastName);
+        Assert.assertEquals(personalDetailsPage.getFirstNameValue(), firstName);
+        Assert.assertEquals(personalDetailsPage.getLastNameValue(), lastName);
         Assert.assertEquals(personalDetailsPage.getEmployeeIdAtDetailsPage(), employeeId);
-        Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeSize));
+        Assert.assertTrue(personalDetailsPage.isAvatarUploaded(avatarBeforeSize));
     }
 
     @Then("the last name field shows error {string}")
