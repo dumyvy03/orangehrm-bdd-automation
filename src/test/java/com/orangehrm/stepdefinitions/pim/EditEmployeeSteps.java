@@ -64,14 +64,7 @@ public class EditEmployeeSteps {
         dateOfBirth = updatedData.get("Date of Birth");
         gender = updatedData.get("Gender");
 
-        personalDetailsPage.enterFirstNameTextbox(firstName);
-        personalDetailsPage.enterLastNameTextbox(lastName);
-        personalDetailsPage.enterDriverLicenseTextbox(driverLicense);
-        personalDetailsPage.enterLicenseExpiryDateTextbox(licenseExpiryDate);
-        personalDetailsPage.selectNationalityDropdown(nationality);
-        personalDetailsPage.selectMaritalStatusDropdown(maritalStatus);
-        personalDetailsPage.enterDateOfBirthTextbox(dateOfBirth);
-        personalDetailsPage.selectGenderRadioButton(gender);
+        personalDetailsPage.enterPersonalDetails(updatedData);
     }
 
     @And("clicks the Save button to update")
@@ -81,15 +74,15 @@ public class EditEmployeeSteps {
 
     @Then("the system saves the updated information successfully")
     public void verifyUpdatedInformation() {
-        Assert.assertEquals(personalDetailsPage.getFirstName(), firstName);
-        Assert.assertEquals(personalDetailsPage.getLastName(), lastName);
+        Assert.assertEquals(personalDetailsPage.getFirstNameValue(), firstName);
+        Assert.assertEquals(personalDetailsPage.getLastNameValue(), lastName);
         Assert.assertEquals(personalDetailsPage.getDriverLicenseNumberValue(), driverLicense);
         Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateValue(), licenseExpiryDate);
         Assert.assertEquals(personalDetailsPage.getSelectedNationalityText(), nationality);
         Assert.assertEquals(personalDetailsPage.getSelectedMaritalStatusText(), maritalStatus);
         Assert.assertEquals(personalDetailsPage.getDateOfBirthValue(), dateOfBirth);
         Assert.assertTrue(personalDetailsPage.isGenderSelected(gender));
-        Assert.assertTrue(personalDetailsPage.isAvatarUploadSuccess(avatarBeforeUploadSize));
+        Assert.assertTrue(personalDetailsPage.isAvatarUploaded(avatarBeforeUploadSize));
     }
 
     @And("the admin updates license expiry date {string}")
