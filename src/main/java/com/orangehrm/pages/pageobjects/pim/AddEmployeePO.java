@@ -47,12 +47,12 @@ public class AddEmployeePO extends BasePage {
     public String getEmployeeIdValue() {
         return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
     }
-    
+
     public String getLastNameErrorMessage() {
-        return getTextElement(driver, AddEmployeePUI.LASTNAME_ERROR_TEXT);
+        return getElementText(driver, AddEmployeePUI.LASTNAME_ERROR_TEXT);
     }
 
     public String getAvatarErrorMessage() {
-        return getTextElement(driver, AddEmployeePUI.AVATAR_ERROR_TEXTBOX);
+        return getElementText(driver, AddEmployeePUI.AVATAR_ERROR_TEXTBOX);
     }
 }
