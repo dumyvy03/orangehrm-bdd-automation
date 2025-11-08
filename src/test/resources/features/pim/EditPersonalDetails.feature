@@ -35,7 +35,6 @@ Feature: Edit employee
     And the admin clicks the Search button
     And clicks Edit button in search results
     And the admin updates first name empty "<firstname>"
-    And clicks the Save button to update
     Then the first name field shows error "Required"
     Examples:
       | emp_id | firstname |
@@ -47,7 +46,6 @@ Feature: Edit employee
     And the admin clicks the Search button
     And clicks Edit button in search results
     And the admin updates license expiry date "<license_expiry_date>"
-    And clicks the Save button to update
     Then the license expiry date field shows error "Should be a valid date in yyyy-mm-dd format"
 
     Examples:
@@ -60,7 +58,6 @@ Feature: Edit employee
     And the admin clicks the Search button
     And clicks Edit button in search results
     And the admin updates date of birth "<date_of_birth>"
-    And clicks the Save button to update
     Then the date of birth field shows error "Should be a valid date in yyyy-mm-dd format"
 
     Examples:
