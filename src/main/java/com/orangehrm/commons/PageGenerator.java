@@ -1,13 +1,18 @@
 package com.orangehrm.commons;
 
-import com.orangehrm.pages.pageobjects.commons.ValidationPO;
-import com.orangehrm.pages.pageobjects.login.LoginPO;
+import com.orangehrm.pages.pageobjects.admin.AddUserPO;
+import com.orangehrm.pages.pageobjects.admin.UserManagementPO;
 import com.orangehrm.pages.pageobjects.commons.SidebarPO;
+import com.orangehrm.pages.pageobjects.commons.ValidationPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
+import com.orangehrm.pages.pageobjects.login.LoginPO;
 import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
 import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
 import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
 import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
+import com.orangehrm.pages.pageobjects.recruitment.AddCandidatePO;
+import com.orangehrm.pages.pageobjects.recruitment.CandidateProfilePO;
+import com.orangehrm.pages.pageobjects.recruitment.CandidatesPO;
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
@@ -44,4 +49,23 @@ public class PageGenerator {
         return new ValidationPO(driver);
     }
 
+    public static AddCandidatePO getAddCandidatePage(WebDriver driver) {
+        return new AddCandidatePO(driver);
+    }
+
+    public static CandidatesPO getCandidatesPage(WebDriver driver) {
+        return new CandidatesPO(driver);
+    }
+
+    public static CandidateProfilePO getCandidateProfilePage(WebDriver driver) {
+        return new CandidateProfilePO(driver);
+    }
+
+    public static UserManagementPO getUserManagementPage(WebDriver driver) {
+        return new UserManagementPO(driver);
+    }
+
+    public static AddUserPO getAddUserPage(WebDriver driver) {
+        return new AddUserPO(driver);
+    }
 }
