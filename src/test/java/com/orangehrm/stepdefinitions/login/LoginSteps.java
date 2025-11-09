@@ -45,14 +45,4 @@ public class LoginSteps {
     public void verifyLoginErrorMessage(String errorMessage) {
         Assert.assertEquals(loginPage.getLoginErrorMessage(), errorMessage);
     }
-
-    @Then("the username field shows error {string}")
-    public void verifyUsernameErrorMessage(String errorMessage) {
-        Assert.assertEquals(loginPage.getUsernameErrorMessage(), errorMessage);
-    }
-
-    @Then("the password field shows error {string}")
-    public void verifyPasswordShowsError(String errorMessage) {
-        Assert.assertEquals(loginPage.getPasswordErrorMessage(), errorMessage);
-    }
 }
