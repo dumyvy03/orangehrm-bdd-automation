@@ -62,4 +62,4 @@ Feature: Add new admin user
     Then the confirm password field shows error "Passwords do not match"
     Examples:
       | password  | confirm_password |
-      | Admin@123 | Admin@12         |
+      | Z!9B@Xx4m | Z!9B@Xx4         |
