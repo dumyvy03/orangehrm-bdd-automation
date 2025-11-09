@@ -11,10 +11,16 @@ public class EmployeeListPUI {
 
     public static final String EMPLOYEE_ID_IN_EMPLOYEE_TABLE = "Xpath=//div[text()='%s']";
 
+    public static final String FIRSTNAME_IN_EMPLOYEE_TABLE = "Xpath=//div[text()='First (& Middle) Name']/ancestor::div[@class='oxd-table-header']/following-sibling::div//div[3]/div";
+
+    public static final String LASTNAME_IN_EMPLOYEE_TABLE = "Xpath=//div[text()='Last Name']/ancestor::div[@class='oxd-table-header']/following-sibling::div//div[4]/div";
+
     public static final String CONFIRM_DELETE_BUTTON = "Xpath=//div[contains(@class,'orangehrm-dialog-popup')]//button[contains(string(),'Yes, Delete')]";
 
     public static final String EMPLOYEE_NAME_TEXTBOX = "Xpath=//label[text()='Employee Name']/parent::div/following-sibling::div//input";
-    
+
     public static final String SEARCH_BUTTON = "Xpath=//button[contains(normalize-space(.), 'Search')]";
+
+    public static final String NO_RECORDS_FOUND_MESSAGE = "Css=div.orangehrm-horizontal-padding>span";
 
 }
