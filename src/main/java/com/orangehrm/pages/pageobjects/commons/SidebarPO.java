@@ -2,7 +2,9 @@ package com.orangehrm.pages.pageobjects.commons;
 
 import com.orangehrm.commons.BasePage;
 import com.orangehrm.commons.PageGenerator;
+import com.orangehrm.pages.pageobjects.admin.UserManagementPO;
 import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
+import com.orangehrm.pages.pageobjects.recruitment.CandidatesPO;
 import com.orangehrm.pages.pageuis.commons.SidebarPUI;
 import org.openqa.selenium.WebDriver;
 
@@ -17,6 +19,18 @@ public class SidebarPO extends BasePage {
         sleep(2);
         clickElement(driver, SidebarPUI.PIM_LINK);
         return PageGenerator.getEmployeeListPage(driver);
+    }
+
+    public CandidatesPO openRecruitmentPage() {
+        sleep(2);
+        clickElement(driver, SidebarPUI.RECRUITMENT_LINK);
+        return PageGenerator.getCandidatesPage(driver);
+    }
+
+    public UserManagementPO openAdminPage() {
+        sleep(2);
+        clickElement(driver, SidebarPUI.ADMIN_LINK);
+        return PageGenerator.getUserManagementPage(driver);
     }
 
 }
