@@ -1,13 +1,15 @@
 package com.orangehrm.commons;
 
 
-import com.orangehrm.pages.pageuis.BasePUI;
+import com.orangehrm.pages.pageuis.commons.BasePUI;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BasePage {
 
@@ -77,6 +79,25 @@ public class BasePage {
         }
     }
 
+    public void scrollToElement(WebDriver driver, String locatorExpression) {
+        new Actions(driver).scrollToElement(getElement(driver, locatorExpression)).perform();
+    }
+
+    public void scrollToElement(WebDriver driver, String locatorExpression, String... params) {
+        new Actions(driver).scrollToElement(getElement(driver, formatLocator(locatorExpression, params))).perform();
+    }
+
+    public void selectDropdownSuggestion(WebDriver driver, String locatorExpression, String value) {
+        waitForElementVisible(driver, locatorExpression);
+        List<WebElement> elements = getElements(driver, locatorExpression);
+        for (WebElement element : elements) {
+            if (element.getText().equals(value)) {
+                element.click();
+                break;
+            }
+        }
+    }
+
     /* ================================================
        3. GETTERS (text, attribute, size, css, etc.)
        ================================================= */
@@ -85,9 +106,17 @@ public class BasePage {
         return getElement(driver, locatorExpression).getAttribute(attributeName);
     }
 
-    public String getTextElement(WebDriver driver, String locatorExpression) {
+    public String getElementText(WebDriver driver, String locatorExpression) {
         waitForElementVisible(driver, locatorExpression);
         return getElement(driver, locatorExpression).getText();
+    }
+
+    public List<String> getElementsText(WebDriver driver, String locatorExpression) {
+        waitForElementVisible(driver, locatorExpression);
+        return getElements(driver, locatorExpression)
+                .stream()
+                .map(element -> element.getText().trim())
+                .collect(Collectors.toList());
     }
 
     public Dimension getElementSize(WebDriver driver, String locatorExpression) {
@@ -114,6 +143,11 @@ public class BasePage {
         });
     }
 
+    public boolean isElementDisplayed(WebDriver driver, String locatorExpression, String... params) {
+        waitForElementVisible(driver, locatorExpression, params);
+        return getElement(driver, formatLocator(locatorExpression, params)).isDisplayed();
+    }
+
     public boolean isElementSelected(WebDriver driver, String locatorExpression, String... params) {
         waitForElementSelected(driver, locatorExpression, params);
         return getElement(driver, formatLocator(locatorExpression, params)).isSelected();
@@ -130,17 +164,17 @@ public class BasePage {
         }
     }
 
-    public void scrollPageToBottomByJS(WebDriver driver) {
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
-    }
-
-
     /* ================================================
       6. WAIT HANDLERS
       ================================================= */
     public void waitForElementVisible(WebDriver driver, String locatorExpression) {
         new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
                 .until(ExpectedConditions.visibilityOfElementLocated(getByLocator(locatorExpression)));
+    }
+
+    public void waitForElementVisible(WebDriver driver, String locatorExpression, String... params) {
+        new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(getByLocator(formatLocator(locatorExpression, params))));
     }
 
     public void waitListForElementsVisible(WebDriver driver, String locatorExpression) {
