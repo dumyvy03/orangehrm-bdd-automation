@@ -4,7 +4,7 @@
     <test name="Run on Firefox browser">
         <parameter name="browsers" value="chrome"/>
         <classes>
-            <class name="com.orangehrm.runner.TestRunner"/>
+            <class name="com.orangehrm.runner.admin.AddAdminTestRunner"/>
         </classes>
     </test>
 </suite>
