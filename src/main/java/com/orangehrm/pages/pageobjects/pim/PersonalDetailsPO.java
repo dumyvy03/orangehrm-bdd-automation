@@ -5,6 +5,8 @@ import com.orangehrm.pages.pageuis.pim.PersonalDetailsPUI;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+
 public class PersonalDetailsPO extends EmployeeNavigationPO {
     private WebDriver driver;
 
@@ -13,15 +15,15 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
         this.driver = driver;
     }
 
-    public String getFirstName() {
+    public String getFirstNameValue() {
         return getAttributeValue(driver, PersonalDetailsPUI.FIRSTNAME_TEXTBOX, "value");
     }
 
-    public String getLastName() {
+    public String getLastNameValue() {
         return getAttributeValue(driver, PersonalDetailsPUI.LASTNAME_TEXTBOX, "value");
     }
 
-    public boolean isAvatarUploadSuccess(Dimension avatarBeforeSize) {
+    public boolean isAvatarUploaded(Dimension avatarBeforeSize) {
         Dimension avatarAfterUploadSize = getElementSize(driver, PersonalDetailsPUI.EMPLOYEE_AVATAR);
         return !avatarAfterUploadSize.equals(avatarBeforeSize);
     }
@@ -79,11 +81,11 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
     }
 
     public String getSelectedNationalityText() {
-        return getTextElement(driver, PersonalDetailsPUI.NATIONALITY_SELECTED_TEXT);
+        return getElementText(driver, PersonalDetailsPUI.NATIONALITY_SELECTED_TEXT);
     }
 
     public String getSelectedMaritalStatusText() {
-        return getTextElement(driver, PersonalDetailsPUI.MARITAL_STATUS_SELECTED_TEXT);
+        return getElementText(driver, PersonalDetailsPUI.MARITAL_STATUS_SELECTED_TEXT);
     }
 
     public String getDateOfBirthValue() {
@@ -109,11 +111,22 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
     }
 
     public String getLicenseExpiryDateErrorMessage() {
-        return getTextElement(driver, PersonalDetailsPUI.LICENSE_EXPIRY_DATE_ERROR_TEXT);
+        return getElementText(driver, PersonalDetailsPUI.LICENSE_EXPIRY_DATE_ERROR_TEXT);
     }
 
     public String getDateOfBirthErrorMessage() {
-        return getTextElement(driver, PersonalDetailsPUI.DATE_OF_BIRTH_ERROR_TEXT);
+        return getElementText(driver, PersonalDetailsPUI.DATE_OF_BIRTH_ERROR_TEXT);
     }
-    
+
+    public void enterPersonalDetails(Map<String, String> updatedData) {
+        enterFirstNameTextbox(updatedData.get("First Name"));
+        enterLastNameTextbox(updatedData.get("Last Name"));
+        enterDriverLicenseTextbox(updatedData.get("Driver's License Number"));
+        enterLicenseExpiryDateTextbox(updatedData.get("License Expiry Date"));
+        selectNationalityDropdown(updatedData.get("Nationality"));
+        selectMaritalStatusDropdown(updatedData.get("Marital Status"));
+        enterDateOfBirthTextbox(updatedData.get("Date of Birth"));
+        selectGenderRadioButton(updatedData.get("Gender"));
+    }
+
 }
