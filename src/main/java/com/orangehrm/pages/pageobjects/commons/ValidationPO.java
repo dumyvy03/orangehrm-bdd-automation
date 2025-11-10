@@ -12,6 +12,16 @@ public class ValidationPO extends BasePage {
     }
 
     public String getFirstNameErrorMessage() {
-        return getTextElement(driver, ValidationPUI.FIRSTNAME_ERROR_TEXT);
+        return getElementText(driver, ValidationPUI.FIRSTNAME_ERROR_TEXT);
     }
+
+    public String getUsernameErrorMessage() {
+        sleep(2);
+        return getElementText(driver, ValidationPUI.USERNAME_ERROR_MESSAGE);
+    }
+
+    public String getPasswordErrorMessage() {
+        return getElementText(driver, ValidationPUI.PASSWORD_ERROR_MESSAGE);
+    }
+
 }
