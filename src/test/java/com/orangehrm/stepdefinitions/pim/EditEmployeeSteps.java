@@ -1,7 +1,7 @@
 package com.orangehrm.stepdefinitions.pim;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
 import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
 import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
@@ -15,20 +15,14 @@ import org.testng.Assert;
 import java.util.Map;
 
 public class EditEmployeeSteps {
-    private final TestContext testContext;
     private EmployeeListPO employeeListPage;
     private PersonalDetailsPO personalDetailsPage;
 
     String firstName, lastName, driverLicense, licenseExpiryDate, nationality, maritalStatus, dateOfBirth, gender;
     Dimension avatarBeforeUploadSize;
 
-    public EditEmployeeSteps(TestContext testContext) {
-        this.testContext = testContext;
-    }
-
-    @And("navigates to the Employee List page")
-    public void navigatesToTheEmployeeListPage() {
-        employeeListPage = PageGenerator.getSidebarPage(testContext.getDriver()).openPIMPage();
+    public EditEmployeeSteps() {
+        employeeListPage = PageGenerator.getEmployeeListPage(DriverFactory.getDriver());
     }
 
     @When("the admin searches by employee id {string}")
@@ -90,11 +84,6 @@ public class EditEmployeeSteps {
         personalDetailsPage.enterLicenseExpiryDateTextbox(licenseExpiryDate);
     }
 
-    @And("the admin updates date of birth {string}")
-    public void theAdminUpdatesDateOfBirth(String dateOfBirth) {
-        personalDetailsPage.enterDateOfBirthTextbox(dateOfBirth);
-    }
-
     @And("the admin updates first name empty {string}")
     public void theAdminUpdatesFirstNameEmpty(String firstName) {
         personalDetailsPage.enterFirstNameTextbox(firstName);
@@ -105,9 +94,4 @@ public class EditEmployeeSteps {
         Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateErrorMessage(), errorMessage);
     }
 
-
-    @Then("the date of birth field shows error {string}")
-    public void verifyDateOfBirthFieldShowsError(String errorMessage) {
-        Assert.assertEquals(personalDetailsPage.getDateOfBirthErrorMessage(), errorMessage);
-    }
 }
