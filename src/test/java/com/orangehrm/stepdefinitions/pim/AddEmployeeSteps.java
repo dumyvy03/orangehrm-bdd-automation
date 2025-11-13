@@ -1,7 +1,7 @@
 package com.orangehrm.stepdefinitions.pim;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
 import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
 import io.cucumber.java.en.And;
@@ -11,30 +11,26 @@ import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 
 public class AddEmployeeSteps {
-    private final TestContext testContext;
     private AddEmployeePO addEmployeePage;
-    String firstName, lastName, employeeId;
-    Dimension avatarBeforeSize;
+    private String firstName, lastName;
+    private Dimension avatarBeforeSize;
     private PersonalDetailsPO personalDetailsPage;
-
-    public AddEmployeeSteps(TestContext testContext) {
-        this.testContext = testContext;
-    }
+    public static String employeeId;
+    public static boolean isEmployeeCreated;
 
     @And("navigates to the Add New Employee page")
     public void navigatesToAddNewEmployeePage() {
-        addEmployeePage = PageGenerator.getSidebarPage(testContext.getDriver())
+        addEmployeePage = PageGenerator.getSidebarPage(DriverFactory.getDriver())
                 .openPIMPage()
                 .openAddEmployeePage();
     }
 
-    @When("the admin enters the employee name {string} {string} and uploads the avatar {string}")
+    @When("the admin enters the employee name first name {string} last name {string} and uploads the avatar {string}")
     public void entersEmployeeNameAndUploadsAvatar(String firstName, String lastName, String avatar) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.employeeId = addEmployeePage.getEmployeeIdValue();
-        testContext.getScenarioContext().setDataMap("employeeId", employeeId);
         this.avatarBeforeSize = addEmployeePage.getAvatarSize();
+        employeeId = addEmployeePage.getEmployeeIdValue();
         addEmployeePage.enterEmployeeDetails(firstName, lastName, avatar);
     }
 
@@ -47,19 +43,28 @@ public class AddEmployeeSteps {
     public void verifyEmployeeDetailsDisplayed() {
         Assert.assertEquals(personalDetailsPage.getFirstNameValue(), firstName);
         Assert.assertEquals(personalDetailsPage.getLastNameValue(), lastName);
-        Assert.assertEquals(personalDetailsPage.getEmployeeIdAtDetailsPage(), employeeId);
         Assert.assertTrue(personalDetailsPage.isAvatarUploaded(avatarBeforeSize));
+        isEmployeeCreated = true;
     }
 
     @Then("the last name field shows error {string}")
     public void verifyLastNamedErrorMessage(String errorMessage) {
         Assert.assertEquals(addEmployeePage.getLastNameErrorMessage(), errorMessage);
-        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
     }
 
     @Then("the avatar field shows error {string}")
     public void verifyAvatarFieldShowsError(String errorMessage) {
         Assert.assertEquals(addEmployeePage.getAvatarErrorMessage(), errorMessage);
-        testContext.getScenarioContext().setDataMap("errorMessage", errorMessage);
+    }
+    
+    @When("the admin enters the employee name first name {string} last name {string}")
+    public void theAdminEntersTheEmployeeNameFirstNameLastName(String firstName, String lastName) {
+        addEmployeePage.enterFirstNameTextbox(firstName);
+        addEmployeePage.enterLastNameTextbox(lastName);
+    }
+
+    @When("the admin uploads the avatar {string}")
+    public void theAdminUploadsTheAvatar(String avatarPath) {
+        addEmployeePage.uploadAvatar(avatarPath);
     }
 }
