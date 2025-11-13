@@ -1,7 +1,7 @@
 package com.orangehrm.stepdefinitions.admin;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.admin.AddUserPO;
 import com.orangehrm.pages.pageobjects.admin.UserManagementPO;
 import io.cucumber.datatable.DataTable;
@@ -12,19 +12,13 @@ import org.testng.Assert;
 
 import java.util.Map;
 
-public class AddAdminSteps {
-    private final TestContext testContext;
+public class AddUserSteps {
     private UserManagementPO userManagementPage;
     private String userName;
     private AddUserPO addUserPage;
 
-    public AddAdminSteps(TestContext testContext) {
-        this.testContext = testContext;
-    }
-
-    @And("navigates to the Admin page")
-    public void navigatesToTheAdminPage() {
-        userManagementPage = PageGenerator.getSidebarPage(testContext.getDriver()).openAdminPage();
+    public AddUserSteps() {
+        userManagementPage = PageGenerator.getUserManagementPage(DriverFactory.getDriver());
     }
 
     @And("clicks the Add button to open the Add User page")
@@ -49,12 +43,12 @@ public class AddAdminSteps {
         Assert.assertTrue(userManagementPage.isUserNameDisplayed(userName));
     }
 
-    @When("the admin enters username {string}")
+    @When("the admin enters username {string} on Add User page")
     public void entersUsername(String userName) {
         addUserPage.enterUserNameTextbox(userName);
     }
 
-    @When("the admin enters password {string}")
+    @When("the admin enters password {string} on Add User page")
     public void entersPassword(String password) {
         addUserPage.enterPasswordTextbox(password);
     }
