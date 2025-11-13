@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = ("src/test/resources/features/admin/AddAdmin.feature"),
+        features = ("src/test/resources/features/admin/AddUser.feature"),
         glue = {"com.orangehrm.stepdefinitions",
                 "com.orangehrm.hooks",
                 "com.orangehrm.context",
@@ -13,7 +13,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         monochrome = true
 )
-public class AddAdminTestRunner extends AbstractTestNGCucumberTests {
+public class AddUserTestRunner extends AbstractTestNGCucumberTests {
 }
 
 
