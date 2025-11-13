@@ -9,37 +9,43 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class DriverFactory {
-    private WebDriver driver;
+    private static WebDriver driver;
 
-    private void initDriver(String browserName) {
+    private static void initDriver(String browserName) {
         BrowserType browserType = BrowserType.valueOf(browserName.toUpperCase());
         switch (browserType) {
             case CHROME:
-                this.driver = new ChromeDriver();
+                driver = new ChromeDriver();
                 break;
             case EDGE:
-                this.driver = new EdgeDriver();
+                driver = new EdgeDriver();
                 break;
             case FIREFOX:
-                this.driver = new FirefoxDriver();
+                driver = new FirefoxDriver();
                 break;
             default:
                 throw new IllegalArgumentException("Browser not supported");
         }
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
     }
 
-    public WebDriver getDriver(String browserName) {
-        if (this.driver == null) {
+    public static void createDriver(String browserName) {
+        if (driver == null) {
             initDriver(browserName);
         }
-        return this.driver;
     }
 
-    public void quitDriver() {
-        if (this.driver != null) {
-            this.driver.quit();
-            this.driver = null;
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            throw new IllegalStateException("Driver has not been initialized. Call createDriver() first.");
+        }
+        return driver;
+    }
+
+    public static void quitDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
         }
     }
 }
