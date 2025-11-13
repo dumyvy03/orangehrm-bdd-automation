@@ -1,11 +1,11 @@
-Feature: Add new admin user
+Feature: Add new user
   As an HR admin
   I want to add a new system user
   So that I can manage user accounts and access rights in the system
 
   Background:
     Given the admin has successfully logged in
-    And navigates to the Admin page
+    And navigates to the User Management page
     And clicks the Add button to open the Add User page
 
   @positive
@@ -25,7 +25,7 @@ Feature: Add new admin user
 
   @negative
   Scenario Outline: Add user with username shorter than 5 characters
-    When the admin enters username "<username>"
+    When the admin enters username "<username>" on Add User page
     Then the username field shows error "Should be at least 5 characters"
     Examples:
       | username |
@@ -33,7 +33,7 @@ Feature: Add new admin user
 
   @negative
   Scenario Outline: Add User with existing username
-    When the admin enters username "<username>"
+    When the admin enters username "<username>" on Add User page
     Then the username field shows error "Already exists"
     Examples:
       | username |
@@ -49,7 +49,7 @@ Feature: Add new admin user
 
   @negative
   Scenario Outline: Add User with password missing numeric character
-    When the admin enters password "<password>"
+    When the admin enters password "<password>" on Add User page
     Then the password field shows error "Your password must contain minimum 1 number"
     Examples:
       | password  |
@@ -60,6 +60,7 @@ Feature: Add new admin user
   Scenario Outline: Add User with mismatched confirm password
     When the admin enters password "<password>" and confirm password "<confirm_password>"
     Then the confirm password field shows error "Passwords do not match"
+
     Examples:
       | password  | confirm_password |
       | Z!9B@Xx4m | Z!9B@Xx4         |
