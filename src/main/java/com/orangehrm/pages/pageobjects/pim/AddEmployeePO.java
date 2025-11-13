@@ -17,17 +17,17 @@ public class AddEmployeePO extends BasePage {
         return getElementSize(driver, AddEmployeePUI.EMPLOYEE_AVATAR);
     }
 
-    private void enterFirstNameTextbox(String firstName) {
+    public void enterFirstNameTextbox(String firstName) {
         sendKeysElement(driver, AddEmployeePUI.FIRSTNAME_TEXTBOX, firstName);
         sleep(1);
     }
 
-    private void enterLastNameTextbox(String lastName) {
+    public void enterLastNameTextbox(String lastName) {
         sendKeysElement(driver, AddEmployeePUI.LASTNAME_TEXTBOX, lastName);
         sleep(1);
     }
 
-    private void uploadAvatar(String avatar) {
+    public void uploadAvatar(String avatar) {
         handleFileUpload(driver, avatar);
         sleep(1);
     }
@@ -44,15 +44,15 @@ public class AddEmployeePO extends BasePage {
         return PageGenerator.getPersonalDetailsPage(driver);
     }
 
-    public String getEmployeeIdValue() {
-        return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
-    }
-
     public String getLastNameErrorMessage() {
         return getElementText(driver, AddEmployeePUI.LASTNAME_ERROR_TEXT);
     }
 
     public String getAvatarErrorMessage() {
         return getElementText(driver, AddEmployeePUI.AVATAR_ERROR_TEXTBOX);
+    }
+
+    public String getEmployeeIdValue() {
+        return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
     }
 }
