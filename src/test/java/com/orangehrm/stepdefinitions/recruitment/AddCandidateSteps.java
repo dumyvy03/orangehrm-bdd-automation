@@ -1,7 +1,7 @@
 package com.orangehrm.stepdefinitions.recruitment;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.recruitment.AddCandidatePO;
 import com.orangehrm.pages.pageobjects.recruitment.CandidateProfilePO;
 import com.orangehrm.pages.pageobjects.recruitment.CandidatesPO;
@@ -9,32 +9,33 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import java.util.Map;
 
 public class AddCandidateSteps {
-    private final TestContext testContext;
+    private final WebDriver driver;
     private CandidatesPO candidatePage;
     private AddCandidatePO addCandidatePage;
     private String firstName, lastName, email, contactNumber, resume, vacancy, keywords, dateOfApplication, notes;
     private CandidateProfilePO candidateProfilePage;
 
-    public AddCandidateSteps(TestContext testContext) {
-        this.testContext = testContext;
+    public AddCandidateSteps() {
+        driver = DriverFactory.getDriver();
     }
 
     @And("navigates to the Candidate page")
     public void navigatesToCandidatePage() {
-        candidatePage = PageGenerator.getSidebarPage(testContext.getDriver()).openRecruitmentPage();
+        candidatePage = PageGenerator.getSidebarPage(driver).openRecruitmentPage();
     }
 
-    @When("the admin clicks the Add button to open the Add Candidate form")
-    public void theAdminClicksTheAddButtonToOpenTheAddCandidateForm() {
+    @And("clicks the Add button to open the Add Candidate page")
+    public void clicksTheAddButtonToOpenTheAddCandidatePage() {
         addCandidatePage = candidatePage.clickAddButton();
     }
 
-    @And("enters candidate information")
+    @And("the admin enters candidate information")
     public void entersCandidateInformation(DataTable dataTable) {
         Map<String, String> addCandidateData = dataTable.asMap(String.class, String.class);
         firstName = addCandidateData.get("First Name");
@@ -70,10 +71,8 @@ public class AddCandidateSteps {
     }
 
 
-    @When("the admin enters first name {string} last name {string} and email {string}")
-    public void entersFirstNameLastNameAndEmail(String firstName, String lastName, String email) {
-        addCandidatePage.enterFirstNameTextbox(firstName);
-        addCandidatePage.enterLastNameTextbox(lastName);
+    @When("the admin enters email {string}")
+    public void entersEmail(String email) {
         addCandidatePage.enterEmailTextbox(email);
     }
 
@@ -82,7 +81,7 @@ public class AddCandidateSteps {
         Assert.assertEquals(addCandidatePage.getEmailErrorMessage(), errorMessage);
     }
 
-    @And("uploads resume file {string}")
+    @When("the admin uploads resume file {string}")
     public void uploadsResumeFile(String resume) {
         addCandidatePage.uploadResumeFile(resume);
     }
@@ -92,18 +91,15 @@ public class AddCandidateSteps {
         Assert.assertEquals(addCandidatePage.getResumeErrorMessage(), errorMessage);
     }
 
-    @When("the admin enters basic candidate details")
-    public void theAdminEntersBasicCandidateDetails(DataTable dataTable) {
-        Map<String, String> basicCandidateData = dataTable.asMap(String.class, String.class);
-        addCandidatePage.enterFirstNameTextbox(basicCandidateData.get("First Name"));
-        addCandidatePage.enterLastNameTextbox(basicCandidateData.get("Last Name"));
-        addCandidatePage.enterEmailTextbox(basicCandidateData.get("Email"));
-        addCandidatePage.enterContactNumberTextbox(basicCandidateData.get("Contact Number"));
-
+    @When("the admin enters contact number {string}")
+    public void theAdminEntersContactNumber(String contactNumber) {
+        addCandidatePage.enterContactNumberTextbox(contactNumber);
     }
 
     @Then("the contact number field shows error {string}")
     public void theContactNumberFieldShowsError(String errorMessage) {
         Assert.assertEquals(addCandidatePage.getContactNumberErrorMessage(), errorMessage);
     }
+
+
 }
