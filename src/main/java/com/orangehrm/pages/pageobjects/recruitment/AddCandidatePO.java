@@ -77,14 +77,17 @@ public class AddCandidatePO extends BasePage {
     }
 
     public String getEmailErrorMessage() {
+        sleep(2);
         return getElementText(driver, AddCandidatePUI.EMAIL_ERR0R_TEXT);
     }
 
     public String getResumeErrorMessage() {
+        sleep(2);
         return getElementText(driver, AddCandidatePUI.RESUME_ERROR_TEXT);
     }
 
     public String getContactNumberErrorMessage() {
+        sleep(2);
         return getElementText(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_TEXT);
     }
 }
