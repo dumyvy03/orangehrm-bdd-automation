@@ -16,6 +16,7 @@ public class DashboardPO extends BasePage {
 
     public boolean isDashboardVisible() {
         waitListForElementsVisible(driver, DashboardPUI.DASHBOARD_WIDGETS);
+        sleep(2);
         List<WebElement> widgets = getElements(driver, DashboardPUI.DASHBOARD_WIDGETS);
         return !widgets.isEmpty();
     }
