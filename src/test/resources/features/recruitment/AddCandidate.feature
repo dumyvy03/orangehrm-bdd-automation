@@ -6,11 +6,11 @@ Feature: Add new candidate
   Background:
     Given the admin has successfully logged in
     And navigates to the Candidate page
+    And clicks the Add button to open the Add Candidate page
 
   @positive
   Scenario Outline: Add candidate with valid data
-    When the admin clicks the Add button to open the Add Candidate form
-    And enters candidate information
+    And the admin enters candidate information
       | First Name     | <firstname>      |
       | Last Name      | <lastname>       |
       | Email          | <email>          |
@@ -27,42 +27,32 @@ Feature: Add new candidate
 
   @negative
   Scenario Outline: Add candidate with invalid email format
-    When the admin clicks the Add button to open the Add Candidate form
-    When the admin enters first name "<firstname>" last name "<lastname>" and email "<email>"
+    When the admin enters email "<email>"
     Then the email field shows error "Expected format: admin@example.com"
     Examples:
-      | firstname | lastname | email     |
-      | John      | Doe      | john.doe@ |
+      | email     |
+      | john.doe@ |
 
   @negative
   Scenario Outline: Add candidate with unsupported CV file type
-    When the admin clicks the Add button to open the Add Candidate form
-    When the admin enters first name "<firstname>" last name "<lastname>" and email "<email>"
-    And uploads resume file "<resume>"
+    When the admin uploads resume file "<resume>"
     Then the resume field shows error "File type not allowed"
     Examples:
-      | firstname | lastname | email              | resume   |
-      | John      | Doe      | john.doe@gmail.com | mori.jpg |
+      | resume   |
+      | mori.jpg |
 
   @negative
   Scenario Outline: Add candidate with CV size exceeding 1MB
-    When the admin clicks the Add button to open the Add Candidate form
-    When the admin enters first name "<firstname>" last name "<lastname>" and email "<email>"
-    And uploads resume file "<resume>"
+    When the admin uploads resume file "<resume>"
     Then the resume field shows error "Attachment Size Exceeded"
     Examples:
-      | firstname | lastname | email              | resume   |
-      | John      | Doe      | john.doe@gmail.com | test.pdf |
+      | resume   |
+      | test.pdf |
 
   @negative
   Scenario Outline: Add candidate with invalid Contact Number format
-    When the admin clicks the Add button to open the Add Candidate form
-    When the admin enters basic candidate details
-      | First Name     | <firstname>      |
-      | Last Name      | <lastname>       |
-      | Email          | <email>          |
-      | Contact Number | <contact_number> |
+    When the admin enters contact number "<contact_number>"
     Then the contact number field shows error "Allows numbers and only + - / ( )"
     Examples:
-      | firstname | lastname | email              | contact_number |
-      | John      | Doe      | john.doe@gmail.com | 123-abc-999    |
+      | contact_number |
+      | 123-abc-999    |
