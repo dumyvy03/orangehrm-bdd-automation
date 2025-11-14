@@ -21,6 +21,4 @@ public class EmployeeListPUI {
 
     public static final String SEARCH_BUTTON = "Xpath=//button[contains(normalize-space(.), 'Search')]";
 
-    public static final String NO_RECORDS_FOUND_MESSAGE = "Css=div.orangehrm-horizontal-padding>span";
-
 }
