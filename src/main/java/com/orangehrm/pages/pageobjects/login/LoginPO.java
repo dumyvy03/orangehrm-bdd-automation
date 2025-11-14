@@ -40,6 +40,7 @@ public class LoginPO extends BasePage {
     }
 
     public String getLoginErrorMessage() {
+        sleep(2);
         return getElementText(driver, LoginPUI.LOGIN_ERROR_TEXT);
     }
 }
