@@ -28,10 +28,6 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
         return !avatarAfterUploadSize.equals(avatarBeforeSize);
     }
 
-    public String getEmployeeIdAtDetailsPage() {
-        return getAttributeValue(driver, PersonalDetailsPUI.EMPLOYEE_ID_TEXTBOX, "value");
-    }
-
     public void enterFirstNameTextbox(String firstName) {
         sendKeysElement(driver, PersonalDetailsPUI.FIRSTNAME_TEXTBOX, firstName);
         sleep(1);
@@ -113,11 +109,7 @@ public class PersonalDetailsPO extends EmployeeNavigationPO {
     public String getLicenseExpiryDateErrorMessage() {
         return getElementText(driver, PersonalDetailsPUI.LICENSE_EXPIRY_DATE_ERROR_TEXT);
     }
-
-    public String getDateOfBirthErrorMessage() {
-        return getElementText(driver, PersonalDetailsPUI.DATE_OF_BIRTH_ERROR_TEXT);
-    }
-
+    
     public void enterPersonalDetails(Map<String, String> updatedData) {
         enterFirstNameTextbox(updatedData.get("First Name"));
         enterLastNameTextbox(updatedData.get("Last Name"));
