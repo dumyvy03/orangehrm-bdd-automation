@@ -4,6 +4,10 @@ import com.orangehrm.commons.BasePage;
 import com.orangehrm.commons.PageGenerator;
 import com.orangehrm.pages.pageuis.admin.UserManagementPUI;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.Map;
 
 public class UserManagementPO extends BasePage {
     private WebDriver driver;
@@ -20,7 +24,71 @@ public class UserManagementPO extends BasePage {
 
     public boolean isUserNameDisplayed(String userName) {
         scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, userName);
-        sleep(1);
+        sleep(2);
         return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, userName);
+    }
+
+    public void enterUserNameTextbox(String username) {
+        sleep(1);
+        sendKeysElement(driver, UserManagementPUI.USERNAME_SEARCH_TEXTBOX, username);
+    }
+
+    public void clickSearchButton() {
+        sleep(1);
+        clickElement(driver, UserManagementPUI.SEARCH_BUTTON);
+    }
+
+    public boolean isUsernameDisplayed(String username) {
+        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+        sleep(2);
+        return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+    }
+
+    public boolean isUserListNotEmpty() {
+        List<WebElement> userRows = getElements(driver, UserManagementPUI.USERNAMES_IN_USER_TABLE);
+        return !userRows.isEmpty();
+    }
+
+    public void clickDeleteSelectedButton() {
+        clickElement(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
+    }
+
+    public void clickConfirmButton() {
+        sleep(2);
+        clickElement(driver, UserManagementPUI.CONFIRM_DELETE_BUTTON);
+    }
+
+    public boolean isUserRemoved(String username) {
+        return isElementUnDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+    }
+
+    public void selectUsersByUsernames(String username1, String username2) {
+        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username1);
+        checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username1);
+        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username2);
+        checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username2);
+    }
+
+    public boolean areUsersRemoved(Map<String, String> usernameData) {
+        String username1 = usernameData.get("Username1");
+        String username2 = usernameData.get("Username2");
+        boolean isUserRemoved1 = isUserRemoved(username1);
+        boolean isUserRemoved2 = isUserRemoved(username2);
+        return isUserRemoved1 && isUserRemoved2;
+    }
+
+    public void clickCancelButton() {
+        sleep(2);
+        clickElement(driver, UserManagementPUI.CONFIRM_CANCEL_BUTTON);
+    }
+
+    public boolean isUserDisplayed(String username) {
+        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+        return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+    }
+
+    public void clickDeleteButton() {
+        scrollToElement(driver, UserManagementPUI.DELETE_BUTTON);
+        clickElement(driver, UserManagementPUI.DELETE_BUTTON);
     }
 }
