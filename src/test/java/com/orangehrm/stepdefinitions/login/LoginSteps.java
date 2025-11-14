@@ -1,9 +1,9 @@
 package com.orangehrm.stepdefinitions.login;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
-import com.orangehrm.pages.pageobjects.login.LoginPO;
 import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
+import com.orangehrm.pages.pageobjects.login.LoginPO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,18 +11,12 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 
 public class LoginSteps {
-    private final TestContext testContext;
     private LoginPO loginPage;
     private DashboardPO dashboardPage;
 
-    public LoginSteps(TestContext testContext) {
-        this.testContext = testContext;
-    }
-
-
     @Given("the admin is on the login page")
     public void theAdminIsOnTheLoginPage() {
-        loginPage = PageGenerator.getLoginPage(testContext.getDriver());
+        loginPage = PageGenerator.getLoginPage(DriverFactory.getDriver());
         loginPage.openLoginPage();
     }
 
