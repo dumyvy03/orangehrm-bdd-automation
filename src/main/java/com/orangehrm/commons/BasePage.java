@@ -63,8 +63,9 @@ public class BasePage {
 
     public void sendKeysElement(WebDriver driver, String locatorExpression, String value) {
         waitForElementVisible(driver, locatorExpression);
-        getElement(driver, locatorExpression).sendKeys(Keys.CONTROL + "a" + Keys.BACK_SPACE);
-        getElement(driver, locatorExpression).sendKeys(value);
+        WebElement element = getElement(driver, locatorExpression);
+        element.sendKeys(Keys.CONTROL + "a" + Keys.BACK_SPACE);
+        element.sendKeys(value);
     }
 
     public void selectDropdownCustomer(WebDriver driver, String parentLocatorExpression, String childLocatorExpression, String value) {
