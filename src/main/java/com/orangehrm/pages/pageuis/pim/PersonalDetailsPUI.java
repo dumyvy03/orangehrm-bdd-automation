@@ -7,8 +7,6 @@ public class PersonalDetailsPUI {
 
     public static final String LASTNAME_TEXTBOX = "Css=input.orangehrm-lastname";
 
-    public static final String EMPLOYEE_ID_TEXTBOX = "Xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input";
-
     public static final String DRIVER_LICENSE_TEXTBOX = "Xpath=//label[text()=\"Driver's License Number\"]/parent::div/following-sibling::div/input";
 
     public static final String LICENSE_EXPIRY_DATE_TEXTBOX = "Xpath=//label[text()='License Expiry Date']/parent::div/following-sibling::div//input";
@@ -29,6 +27,4 @@ public class PersonalDetailsPUI {
 
     public static final String LICENSE_EXPIRY_DATE_ERROR_TEXT = "Xpath=//label[text()='License Expiry Date']/parent::div/following-sibling::span";
 
-    public static final String DATE_OF_BIRTH_ERROR_TEXT = "Xpath=//label[text()='Date of Birth']/parent::div/following-sibling::span";
-    
 }
