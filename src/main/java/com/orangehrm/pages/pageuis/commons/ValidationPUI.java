@@ -6,4 +6,6 @@ public class ValidationPUI {
     public static final String USERNAME_ERROR_MESSAGE = "Xpath=//label[text()='Username']/parent::div//following-sibling::span";
 
     public static final String PASSWORD_ERROR_MESSAGE = "Xpath=//label[text()='Password']/parent::div//following-sibling::span";
+
+    public static final String SEARCH_RESULT_MESSAGE = "Css=div.orangehrm-horizontal-padding>span";
 }
