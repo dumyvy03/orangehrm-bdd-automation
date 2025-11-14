@@ -21,7 +21,14 @@ public class ValidationPO extends BasePage {
     }
 
     public String getPasswordErrorMessage() {
+        sleep(2);
         return getElementText(driver, ValidationPUI.PASSWORD_ERROR_MESSAGE);
+    }
+
+    public String getSearchResultMessage() {
+        scrollToElement(driver, ValidationPUI.SEARCH_RESULT_MESSAGE);
+        waitForLoadingIconInvisible(driver);
+        return getElementText(driver, ValidationPUI.SEARCH_RESULT_MESSAGE);
     }
 
 }
