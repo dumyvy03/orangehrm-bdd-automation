@@ -22,7 +22,7 @@ public class EmployeeListPO extends BasePage {
     }
 
     public void clickDeleteEmployeeButton(String employeeID) {
-        scrollToElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID);
+        scrollToElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID, employeeID);
         sleep(1);
         clickElement(driver, EmployeeListPUI.DELETE_BUTTON_BY_ID, employeeID);
     }
@@ -75,11 +75,5 @@ public class EmployeeListPO extends BasePage {
             }
         }
         return false;
-    }
-
-    public String getErrorSearchMessage() {
-        scrollToElement(driver, EmployeeListPUI.NO_RECORDS_FOUND_MESSAGE);
-        waitForLoadingIconInvisible(driver);
-        return getElementText(driver, EmployeeListPUI.NO_RECORDS_FOUND_MESSAGE);
     }
 }
