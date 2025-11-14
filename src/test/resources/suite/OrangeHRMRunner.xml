@@ -4,7 +4,15 @@
     <test name="Run on Firefox browser">
         <parameter name="browsers" value="chrome"/>
         <classes>
-            <class name="com.orangehrm.runner.admin.AddAdminTestRunner"/>
+            <class name="suite.AllureSetup"/>
+            <!--            <class name="com.orangehrm.runner.login.LoginTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.pim.AddEmployeeTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.pim.EditPersonalDetailsTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.pim.SearchEmployeeTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.recruitment.AddCandidateTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.admin.AddUserTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runner.admin.SearchUserTestRunner"/>-->
+            <class name="com.orangehrm.runner.admin.DeleteUserTestRunner"/>
         </classes>
     </test>
 </suite>
