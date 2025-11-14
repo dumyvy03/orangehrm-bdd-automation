@@ -1,7 +1,7 @@
 package com.orangehrm.stepdefinitions.commons;
 
+import com.orangehrm.commons.DriverFactory;
 import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.context.TestContext;
 import com.orangehrm.pages.pageobjects.commons.ValidationPO;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -9,8 +9,8 @@ import org.testng.Assert;
 public class ValidationSteps {
     private final ValidationPO validationPage;
 
-    public ValidationSteps(TestContext testContext) {
-        this.validationPage = PageGenerator.getValidationPage(testContext.getDriver());
+    public ValidationSteps() {
+        validationPage = PageGenerator.getValidationPage(DriverFactory.getDriver());
     }
 
     @Then("the first name field shows error {string}")
@@ -26,5 +26,10 @@ public class ValidationSteps {
     @Then("the password field shows error {string}")
     public void verifyPasswordShowsError(String errorMessage) {
         Assert.assertEquals(validationPage.getPasswordErrorMessage(), errorMessage);
+    }
+
+    @Then("the system shows {string}")
+    public void verifytheSystemShowsError(String errorMessage) {
+        Assert.assertEquals(validationPage.getSearchResultMessage(), errorMessage);
     }
 }
