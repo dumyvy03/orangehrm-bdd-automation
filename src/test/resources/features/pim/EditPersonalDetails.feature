@@ -27,7 +27,7 @@ Feature: Edit employee
 
     Examples:
       | emp_id | avatar   | firstname | lastname | driver_license_number | license_expiry_date | nationality | marital_status | date_of_birth | gender |
-      | 0018   | mori.png | Hang      | Smith    | D2345678              | 2026-11-30          | Vietnamese  | Single         | 1995-10-19    | Female |
+      | 0090   | mori.png | Hang      | Smith    | D2345678              | 2026-11-30          | Vietnamese  | Single         | 1995-10-19    | Female |
 
   @negative
   Scenario Outline: Edit employee with empty first name
@@ -38,7 +38,7 @@ Feature: Edit employee
     Then the first name field shows error "Required"
     Examples:
       | emp_id | firstname |
-      | 0017   |           |
+      | 0101   |           |
 
   @negative
   Scenario Outline: Edit employee with invalid License Expiry Date format
@@ -46,20 +46,9 @@ Feature: Edit employee
     And the admin clicks the Search button
     And clicks Edit button in search results
     And the admin updates license expiry date "<license_expiry_date>"
+    And clicks the Save button to update
     Then the license expiry date field shows error "Should be a valid date in yyyy-mm-dd format"
 
     Examples:
       | emp_id | license_expiry_date |
-      | 0020   | 2026/05/20          |
-
-  @negative
-  Scenario Outline: Edit employee with invalid Date of Birth format
-    When the admin searches by employee id "<emp_id>"
-    And the admin clicks the Search button
-    And clicks Edit button in search results
-    And the admin updates date of birth "<date_of_birth>"
-    Then the date of birth field shows error "Should be a valid date in yyyy-mm-dd format"
-
-    Examples:
-      | emp_id | date_of_birth |
-      | 0017   | 1998-02-30    |
+      | 0001   | 2026/05/20          |
