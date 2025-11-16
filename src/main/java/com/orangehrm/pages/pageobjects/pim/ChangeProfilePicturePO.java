@@ -13,7 +13,8 @@ public class ChangeProfilePicturePO extends EmployeeNavigationPO {
 
     public void uploadAvatar(String avatarPath) {
         handleFileUpload(driver, avatarPath);
-        sleep(2);
+        waitForElementClickable(driver, ChangeProfilePicturePUI.SAVE_PROFILE_PICTURE_BUTTON);
+        sleep(1);
         clickElement(driver, ChangeProfilePicturePUI.SAVE_PROFILE_PICTURE_BUTTON);
         waitForLoadingIconInvisible(driver);
     }

@@ -15,26 +15,31 @@ public class AddCandidatePO extends BasePage {
     }
 
     public void enterFirstNameTextbox(String firstName) {
+        waitForElementVisible(driver, AddCandidatePUI.FIRSTNAME_TEXTBOX);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.FIRSTNAME_TEXTBOX, firstName);
     }
 
     public void enterLastNameTextbox(String lastName) {
+        waitForElementVisible(driver, AddCandidatePUI.LASTNAME_TEXTBOX);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.LASTNAME_TEXTBOX, lastName);
     }
 
     public void selectVacancyDropdown(String vacancy) {
+        waitForElementClickable(driver, AddCandidatePUI.VACANCY_DROPDOWN_PARENT);
         sleep(1);
         selectDropdownCustomer(driver, AddCandidatePUI.VACANCY_DROPDOWN_PARENT, AddCandidatePUI.VACANCY_DROPDOWN_CHILD, vacancy);
     }
 
     public void enterEmailTextbox(String email) {
+        waitForElementVisible(driver, AddCandidatePUI.EMAIL_TEXTBOX);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.EMAIL_TEXTBOX, email);
     }
 
     public void enterContactNumberTextbox(String contactNumber) {
+        waitForElementVisible(driver, AddCandidatePUI.CONTACT_NUMBER_TEXTBOX);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.CONTACT_NUMBER_TEXTBOX, contactNumber);
     }
@@ -45,11 +50,13 @@ public class AddCandidatePO extends BasePage {
     }
 
     public void enterKeywordsTextbox(String keywords) {
+        waitForElementVisible(driver, AddCandidatePUI.KEYWORDS_TEXTBOX);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.KEYWORDS_TEXTBOX, keywords);
     }
 
     public void enterNotesTextarea(String notes) {
+        waitForElementVisible(driver, AddCandidatePUI.NOTES_TEXTAREA);
         sleep(1);
         sendKeysElement(driver, AddCandidatePUI.NOTES_TEXTAREA, notes);
     }
@@ -66,6 +73,7 @@ public class AddCandidatePO extends BasePage {
     }
 
     public CandidateProfilePO clickSaveButton() {
+        waitForElementClickable(driver, AddCandidatePUI.SAVE_BUTTON);
         sleep(1);
         clickElement(driver, AddCandidatePUI.SAVE_BUTTON);
         waitForLoadingIconInvisible(driver);
@@ -73,20 +81,24 @@ public class AddCandidatePO extends BasePage {
     }
 
     public String getDateOfApplicationValue() {
+        waitForElementPresence(driver, AddCandidatePUI.DATE_OF_APPLICATION_TEXTBOX);
         return getAttributeValue(driver, AddCandidatePUI.DATE_OF_APPLICATION_TEXTBOX, "value");
     }
 
     public String getEmailErrorMessage() {
+        waitForElementVisible(driver, AddCandidatePUI.EMAIL_ERR0R_TEXT);
         sleep(2);
         return getElementText(driver, AddCandidatePUI.EMAIL_ERR0R_TEXT);
     }
 
     public String getResumeErrorMessage() {
+        waitForElementVisible(driver, AddCandidatePUI.RESUME_ERROR_TEXT);
         sleep(2);
         return getElementText(driver, AddCandidatePUI.RESUME_ERROR_TEXT);
     }
 
     public String getContactNumberErrorMessage() {
+        waitForElementVisible(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_TEXT);
         sleep(2);
         return getElementText(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_TEXT);
     }

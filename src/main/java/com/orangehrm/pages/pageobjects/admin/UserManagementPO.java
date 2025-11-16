@@ -16,57 +16,62 @@ public class UserManagementPO extends BasePage {
         this.driver = driver;
     }
 
+    private void selectUser(String username) {
+        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+        waitForElementClickable(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+        checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username);
+    }
+
     public AddUserPO clickAddButton() {
-        sleep(1);
+        waitForElementClickable(driver, UserManagementPUI.ADD_BUTTON);
         clickElement(driver, UserManagementPUI.ADD_BUTTON);
         return PageGenerator.getAddUserPage(driver);
     }
 
-    public boolean isUserNameDisplayed(String userName) {
-        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, userName);
-        sleep(2);
-        return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, userName);
-    }
-
     public void enterUserNameTextbox(String username) {
+        waitForElementVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE);
         sleep(1);
         sendKeysElement(driver, UserManagementPUI.USERNAME_SEARCH_TEXTBOX, username);
     }
 
     public void clickSearchButton() {
+        waitForElementClickable(driver, UserManagementPUI.SEARCH_BUTTON);
         sleep(1);
         clickElement(driver, UserManagementPUI.SEARCH_BUTTON);
     }
 
     public boolean isUsernameDisplayed(String username) {
+        waitForElementVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         sleep(2);
         return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
     }
 
     public boolean isUserListNotEmpty() {
+        waitListForElementsVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE);
         List<WebElement> userRows = getElements(driver, UserManagementPUI.USERNAMES_IN_USER_TABLE);
         return !userRows.isEmpty();
     }
 
     public void clickDeleteSelectedButton() {
+        waitForElementClickable(driver, UserManagementPUI.DELETE_BUTTON);
         clickElement(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
     }
 
     public void clickConfirmButton() {
+        waitForElementClickable(driver, UserManagementPUI.CONFIRM_DELETE_BUTTON);
         sleep(2);
         clickElement(driver, UserManagementPUI.CONFIRM_DELETE_BUTTON);
     }
 
     public boolean isUserRemoved(String username) {
+        waitForElementInVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE);
         return isElementUnDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
     }
 
     public void selectUsersByUsernames(String username1, String username2) {
-        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username1);
-        checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username1);
-        scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username2);
-        checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username2);
+        selectUser(username1);
+        selectUser(username2);
     }
 
     public boolean areUsersRemoved(Map<String, String> usernameData) {
@@ -78,17 +83,20 @@ public class UserManagementPO extends BasePage {
     }
 
     public void clickCancelButton() {
+        waitForElementClickable(driver, UserManagementPUI.CONFIRM_CANCEL_BUTTON);
         sleep(2);
         clickElement(driver, UserManagementPUI.CONFIRM_CANCEL_BUTTON);
     }
 
     public boolean isUserDisplayed(String username) {
+        waitForElementVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         scrollToElement(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         return isElementDisplayed(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
     }
 
     public void clickDeleteButton() {
         scrollToElement(driver, UserManagementPUI.DELETE_BUTTON);
+        waitForElementClickable(driver, UserManagementPUI.DELETE_BUTTON);
         clickElement(driver, UserManagementPUI.DELETE_BUTTON);
     }
 }

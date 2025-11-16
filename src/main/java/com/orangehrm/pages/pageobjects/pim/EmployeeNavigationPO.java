@@ -13,6 +13,7 @@ public class EmployeeNavigationPO extends BasePage {
     }
 
     public PersonalDetailsPO openPersonalDetailsPage() {
+        waitForElementVisible(driver, EmployeeNavigationPUI.PERSONAL_DETAILS_LINK);
         clickElement(driver, EmployeeNavigationPUI.PERSONAL_DETAILS_LINK);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getPersonalDetailsPage(driver);

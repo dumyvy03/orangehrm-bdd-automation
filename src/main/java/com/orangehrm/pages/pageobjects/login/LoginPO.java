@@ -20,16 +20,20 @@ public class LoginPO extends BasePage {
     }
 
     private void enterUserNameTextbox(String username) {
-        sendKeysElement(driver, LoginPUI.USERNAME_TEXTBOX, username);
+        waitForElementVisible(driver, LoginPUI.USERNAME_TEXTBOX);
         sleep(1);
+        sendKeysElement(driver, LoginPUI.USERNAME_TEXTBOX, username);
+
     }
 
     private void enterPasswordTextbox(String password) {
-        sendKeysElement(driver, LoginPUI.PASSWORD_TEXTBOX, password);
+        waitForElementVisible(driver, LoginPUI.PASSWORD_TEXTBOX);
         sleep(1);
+        sendKeysElement(driver, LoginPUI.PASSWORD_TEXTBOX, password);
     }
 
     public DashboardPO clickLoginButton() {
+        waitForElementClickable(driver, LoginPUI.LOGIN_BUTTON);
         clickElement(driver, LoginPUI.LOGIN_BUTTON);
         return PageGenerator.getDashboardPage(driver);
     }
@@ -40,6 +44,7 @@ public class LoginPO extends BasePage {
     }
 
     public String getLoginErrorMessage() {
+        waitForElementVisible(driver, LoginPUI.LOGIN_ERROR_TEXT);
         sleep(2);
         return getElementText(driver, LoginPUI.LOGIN_ERROR_TEXT);
     }

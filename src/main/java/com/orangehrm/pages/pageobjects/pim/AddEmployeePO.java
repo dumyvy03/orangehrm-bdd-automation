@@ -18,18 +18,21 @@ public class AddEmployeePO extends BasePage {
     }
 
     public void enterFirstNameTextbox(String firstName) {
-        sendKeysElement(driver, AddEmployeePUI.FIRSTNAME_TEXTBOX, firstName);
+        waitForElementVisible(driver, AddEmployeePUI.FIRSTNAME_TEXTBOX);
         sleep(1);
+        sendKeysElement(driver, AddEmployeePUI.FIRSTNAME_TEXTBOX, firstName);
     }
 
     public void enterLastNameTextbox(String lastName) {
-        sendKeysElement(driver, AddEmployeePUI.LASTNAME_TEXTBOX, lastName);
+        waitForElementVisible(driver, AddEmployeePUI.LASTNAME_TEXTBOX);
         sleep(1);
+        sendKeysElement(driver, AddEmployeePUI.LASTNAME_TEXTBOX, lastName);
+
     }
 
     public void uploadAvatar(String avatar) {
-        handleFileUpload(driver, avatar);
         sleep(1);
+        handleFileUpload(driver, avatar);
     }
 
     public void enterEmployeeDetails(String firstName, String lastName, String avatar) {
@@ -39,20 +42,24 @@ public class AddEmployeePO extends BasePage {
     }
 
     public PersonalDetailsPO clickSaveButton() {
+        waitForElementClickable(driver, AddEmployeePUI.SAVE_BUTTON_ADD_EMPLOYEE);
         clickElement(driver, AddEmployeePUI.SAVE_BUTTON_ADD_EMPLOYEE);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getPersonalDetailsPage(driver);
     }
 
     public String getLastNameErrorMessage() {
+        waitForElementVisible(driver, AddEmployeePUI.LASTNAME_ERROR_TEXT);
         return getElementText(driver, AddEmployeePUI.LASTNAME_ERROR_TEXT);
     }
 
     public String getAvatarErrorMessage() {
+        waitForElementVisible(driver, AddEmployeePUI.AVATAR_ERROR_TEXTBOX);
         return getElementText(driver, AddEmployeePUI.AVATAR_ERROR_TEXTBOX);
     }
 
     public String getEmployeeIdValue() {
+        waitForElementPresence(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX);
         return getAttributeValue(driver, AddEmployeePUI.EMPLOYEE_ID_TEXTBOX, "value");
     }
 }

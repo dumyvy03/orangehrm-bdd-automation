@@ -16,18 +16,21 @@ public class SidebarPO extends BasePage {
     }
 
     public EmployeeListPO openPIMPage() {
+        waitForElementClickable(driver, SidebarPUI.PIM_LINK);
         sleep(2);
         clickElement(driver, SidebarPUI.PIM_LINK);
         return PageGenerator.getEmployeeListPage(driver);
     }
 
     public CandidatesPO openRecruitmentPage() {
+        waitForElementClickable(driver, SidebarPUI.RECRUITMENT_LINK);
         sleep(2);
         clickElement(driver, SidebarPUI.RECRUITMENT_LINK);
         return PageGenerator.getCandidatesPage(driver);
     }
 
     public UserManagementPO openAdminPage() {
+        waitForElementClickable(driver, SidebarPUI.ADMIN_LINK);
         sleep(2);
         clickElement(driver, SidebarPUI.ADMIN_LINK);
         return PageGenerator.getUserManagementPage(driver);

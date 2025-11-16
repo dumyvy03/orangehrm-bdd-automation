@@ -14,6 +14,7 @@ public class CandidatesPO extends BasePage {
 
     public AddCandidatePO clickAddButton() {
         scrollToElement(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
+        waitForElementClickable(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
         clickElement(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getAddCandidatePage(driver);
