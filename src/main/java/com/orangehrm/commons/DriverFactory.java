@@ -11,7 +11,7 @@ import java.time.Duration;
 public class DriverFactory {
     private static WebDriver driver;
 
-    private static void initDriver(String browserName) {
+    private static void setupDriver(String browserName) {
         BrowserType browserType = BrowserType.valueOf(browserName.toUpperCase());
         switch (browserType) {
             case CHROME:
@@ -29,9 +29,9 @@ public class DriverFactory {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
     }
 
-    public static void createDriver(String browserName) {
+    public static void initDriver(String browserName) {
         if (driver == null) {
-            initDriver(browserName);
+            setupDriver(browserName);
         }
     }
 
