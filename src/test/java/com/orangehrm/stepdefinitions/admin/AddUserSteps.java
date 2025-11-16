@@ -40,7 +40,7 @@ public class AddUserSteps {
 
     @Then("the new user is displayed in the user list")
     public void theNewUserIsDisplayedInTheUserList() {
-        Assert.assertTrue(userManagementPage.isUserNameDisplayed(userName));
+        Assert.assertTrue(userManagementPage.isUsernameDisplayed(userName));
     }
 
     @When("the admin enters username {string} on Add User page")
