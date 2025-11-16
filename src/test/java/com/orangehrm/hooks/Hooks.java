@@ -30,7 +30,7 @@ public class Hooks {
         if (browserName == null) {
             browserName = "chrome";
         }
-        DriverFactory.createDriver(browserName);
+        DriverFactory.initDriver(browserName);
     }
 
     @AfterStep
