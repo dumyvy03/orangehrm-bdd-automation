@@ -1,4 +1,4 @@
-package com.orangehrm.enums;
+package com.orangehrm.commons;
 
 public enum BrowserType {
     CHROME, EDGE, FIREFOX, SAFARI
