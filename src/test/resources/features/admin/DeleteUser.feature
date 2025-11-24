@@ -12,7 +12,7 @@ Feature: Delete User
     When the admin searches for the user "<username>"
     And clicks the Delete button to remove user
     And confirms the deletion
-    Then the system removes the user "<username>" from the user list
+    Then the user table displays "No Records Found"
 
     Examples:
       | username |
