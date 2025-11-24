@@ -1,7 +1,7 @@
 Feature: Delete User
   As an admin user
   I want to delete existing system users
-  So that I can manage inactive or unnecessary accounts
+  So that I can manage accounts that are inactive or no longer needed
 
   Background:
     Given the admin has successfully logged in
@@ -13,20 +13,22 @@ Feature: Delete User
     And clicks the Delete button to remove user
     And confirms the deletion
     Then the system removes the user "<username>" from the user list
+
     Examples:
-      | username    |
-      | ethanwalker |
+      | username |
+      | tomlee   |
 
   @positive
   Scenario Outline: Delete multiple users successfully
     When the admin selects multiple users from the user list
       | Username1 | <username1> |
       | Username2 | <username2> |
-    And clicks the Delete button to remove selected user
+    And clicks the Delete button to remove the selected user
     And confirms the deletion
     Then the system removes all selected users from the user list
       | Username1 | <username1> |
       | Username2 | <username2> |
+
     Examples:
       | username1  | username2   |
       | emmaturner | lucasmiller |
