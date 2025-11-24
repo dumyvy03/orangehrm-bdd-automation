@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.admin;
+package com.orangehrm.pages.admin;
 
 public class UserManagementPUI {
     public static final String ADD_BUTTON = "Xpath=//button[normalize-space(.)='Add']";
@@ -21,5 +21,7 @@ public class UserManagementPUI {
 
     public static final String DELETE_SELECTED_BUTTON = "Xpath=//button[normalize-space(.)='Delete Selected']";
 
-    public static String CONFIRM_CANCEL_BUTTON = "Xpath=//button[normalize-space(.)='No, Cancel']";
+    public static final String CONFIRM_CANCEL_BUTTON = "Xpath=//button[normalize-space(.)='No, Cancel']";
+
+    public static final String SEARCH_RESULT_MESSAGE = "Css=div.orangehrm-horizontal-padding>span";
 }
