@@ -1,14 +1,14 @@
 package com.orangehrm.hooks;
 
-import com.orangehrm.allure.AllureUtils;
-import com.orangehrm.commons.DriverFactory;
+import com.orangehrm.support.ReportUtils;
+import com.orangehrm.core.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.WebDriver;
 
-public class AllureHooks {
+public class ReportHooks {
 
     @Before(order = 1)
     public void beforeScenario(Scenario scenario) {
@@ -19,7 +19,7 @@ public class AllureHooks {
     public void captureFailureScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             WebDriver driver = DriverFactory.getDriver();
-            AllureUtils.attachFailureScreenshot(driver);
+            ReportUtils.attachFailureScreenshot(driver);
         }
     }
 }
