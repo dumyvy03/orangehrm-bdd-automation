@@ -1,4 +1,4 @@
-package com.orangehrm.pages.admin;
+package com.orangehrm.ui.admin;
 
 public class UserManagementPUI {
     public static final String ADD_BUTTON = "Xpath=//button[normalize-space(.)='Add']";
