@@ -1,6 +1,6 @@
-package com.orangehrm.allure;
+package com.orangehrm.support;
 
-import com.orangehrm.commons.GlobalConstants;
+import com.orangehrm.core.GlobalConstants;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
-public class AllureUtils {
+public class ReportUtils {
     private static final Path REPORT_FOLDER = Paths.get("reports");
     private static final Path ALLURE_RESULTS = REPORT_FOLDER.resolve("allure-results");
     private static final String ENVIRONMENT_FILE_NAME = "environment.properties";
