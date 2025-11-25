@@ -1,4 +1,4 @@
-package com.orangehrm.pages.admin;
+package com.orangehrm.ui.admin;
 
 public class AddUserPUI {
     public static final String USER_ROLE_DROPDOWN_PARENT = "Xpath=//label[text()='User Role']/parent::div/following-sibling::div//i";
