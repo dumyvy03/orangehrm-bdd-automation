@@ -1,9 +1,9 @@
 package com.orangehrm.hooks;
 
-import com.orangehrm.commons.DriverFactory;
-import com.orangehrm.commons.PageGenerator;
+import com.orangehrm.core.DriverFactory;
+import com.orangehrm.core.PageGenerator;
 import com.orangehrm.pages.pim.EmployeeListPO;
-import com.orangehrm.stepdefinitions.pim.AddEmployeeSteps;
+import com.orangehrm.steps.pim.AddEmployeeSteps;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.testng.Assert;
