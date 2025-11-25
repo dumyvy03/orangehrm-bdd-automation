@@ -1,7 +1,8 @@
 package com.orangehrm.pages.admin;
 
-import com.orangehrm.commons.BasePage;
-import com.orangehrm.commons.PageGenerator;
+import com.orangehrm.core.BasePage;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.ui.admin.AddUserPUI;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
