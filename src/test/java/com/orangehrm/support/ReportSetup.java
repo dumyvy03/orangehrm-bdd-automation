@@ -1,16 +1,16 @@
-package com.orangehrm.allure;
+package com.orangehrm.support;
 
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-public class AllureSetup {
+public class ReportSetup {
     @BeforeSuite
     public void beforeTest() {
-        AllureUtils.cleanResults();
+        ReportUtils.cleanResults();
     }
 
     @AfterSuite
     public void afterTest() {
-        AllureUtils.createEnvironmentFile();
+        ReportUtils.createEnvironmentFile();
     }
 }
