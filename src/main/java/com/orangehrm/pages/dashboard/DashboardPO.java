@@ -1,7 +1,7 @@
-package com.orangehrm.pages.pageobjects.dashboard;
+package com.orangehrm.pages.dashboard;
 
-import com.orangehrm.commons.BasePage;
-import com.orangehrm.pages.pageuis.dashboard.DashboardPUI;
+import com.orangehrm.core.BasePage;
+import com.orangehrm.ui.dashboard.DashboardPUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,8 +16,8 @@ public class DashboardPO extends BasePage {
 
     public boolean isDashboardVisible() {
         waitListForElementsVisible(driver, DashboardPUI.DASHBOARD_WIDGETS);
-        sleep(2);
         List<WebElement> widgets = getElements(driver, DashboardPUI.DASHBOARD_WIDGETS);
+        sleep(2);
         return !widgets.isEmpty();
     }
 
