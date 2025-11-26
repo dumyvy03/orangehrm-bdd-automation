@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        features = ("src/test/resources/features/login/Login.feature"),
+        features = ("src/test/resources/features/login"),
         glue = {"com.orangehrm.steps",
                 "com.orangehrm.hooks",
                 "com.orangehrm.core"
