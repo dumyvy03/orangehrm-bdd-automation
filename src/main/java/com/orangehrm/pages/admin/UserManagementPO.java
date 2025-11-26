@@ -19,7 +19,7 @@ public class UserManagementPO extends BasePage {
 
     @Step("Select user with username: {0}")
     private void selectUser(String username) {
-        waitForElementPresence(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
+        waitForElementVisible(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         scrollIntoViewJS(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         waitForElementClickable(driver, UserManagementPUI.USERNAME_IN_USER_TABLE, username);
         checkElementByJS(driver, UserManagementPUI.USER_CHECKBOX_BY_USERNAME, username);
@@ -66,7 +66,7 @@ public class UserManagementPO extends BasePage {
 
     @Step("Click Delete Selected button")
     public void clickDeleteSelectedButton() {
-        waitForElementPresence(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
+        waitForElementVisible(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
         scrollIntoViewJS(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
         waitForElementClickable(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
         clickElement(driver, UserManagementPUI.DELETE_SELECTED_BUTTON);
@@ -107,7 +107,7 @@ public class UserManagementPO extends BasePage {
 
     @Step("Click Delete button")
     public void clickDeleteButton() {
-        waitForElementPresence(driver, UserManagementPUI.DELETE_BUTTON);
+        waitForElementVisible(driver, UserManagementPUI.DELETE_BUTTON);
         scrollIntoViewJS(driver, UserManagementPUI.DELETE_BUTTON);
         waitForElementClickable(driver, UserManagementPUI.DELETE_BUTTON);
         sleep(1);
