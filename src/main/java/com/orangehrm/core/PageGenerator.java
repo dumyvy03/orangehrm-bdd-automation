@@ -1,18 +1,17 @@
-package com.orangehrm.commons;
+package com.orangehrm.core;
 
-import com.orangehrm.pages.pageobjects.admin.AddUserPO;
-import com.orangehrm.pages.pageobjects.admin.UserManagementPO;
-import com.orangehrm.pages.pageobjects.commons.SidebarPO;
-import com.orangehrm.pages.pageobjects.commons.ValidationPO;
-import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
-import com.orangehrm.pages.pageobjects.login.LoginPO;
-import com.orangehrm.pages.pageobjects.pim.AddEmployeePO;
-import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
-import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
-import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
-import com.orangehrm.pages.pageobjects.recruitment.AddCandidatePO;
-import com.orangehrm.pages.pageobjects.recruitment.CandidateProfilePO;
-import com.orangehrm.pages.pageobjects.recruitment.CandidatesPO;
+import com.orangehrm.pages.admin.AddUserPO;
+import com.orangehrm.pages.admin.UserManagementPO;
+import com.orangehrm.pages.sidebar.SidebarPO;
+import com.orangehrm.pages.dashboard.DashboardPO;
+import com.orangehrm.pages.login.LoginPO;
+import com.orangehrm.pages.pim.AddEmployeePO;
+import com.orangehrm.pages.pim.ChangeProfilePicturePO;
+import com.orangehrm.pages.pim.EmployeeListPO;
+import com.orangehrm.pages.pim.PersonalDetailsPO;
+import com.orangehrm.pages.recruitment.AddCandidatePO;
+import com.orangehrm.pages.recruitment.CandidateProfilePO;
+import com.orangehrm.pages.recruitment.CandidatesPO;
 import org.openqa.selenium.WebDriver;
 
 public class PageGenerator {
@@ -43,10 +42,6 @@ public class PageGenerator {
 
     public static ChangeProfilePicturePO getChangeProfilePicturePage(WebDriver driver) {
         return new ChangeProfilePicturePO(driver);
-    }
-
-    public static ValidationPO getValidationPage(WebDriver driver) {
-        return new ValidationPO(driver);
     }
 
     public static AddCandidatePO getAddCandidatePage(WebDriver driver) {
