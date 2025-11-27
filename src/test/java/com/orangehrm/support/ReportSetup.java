@@ -7,6 +7,7 @@ public class ReportSetup {
     @BeforeSuite
     public void beforeTest() {
         ReportUtils.cleanResults();
+        ReportUtils.bringHistory();
     }
 
     @AfterSuite
