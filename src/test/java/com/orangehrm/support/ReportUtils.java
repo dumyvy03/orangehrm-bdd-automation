@@ -16,6 +16,7 @@ import java.util.Properties;
 
 public class ReportUtils {
     private static final Path REPORT_FOLDER = Paths.get("reports");
+    private static final Path ALLURE_REPORT = REPORT_FOLDER.resolve("allure-report");
     private static final Path ALLURE_RESULTS = REPORT_FOLDER.resolve("allure-results");
     private static final String ENVIRONMENT_FILE_NAME = "environment.properties";
     private static final Path ENVIRONMENT_FILE = ALLURE_RESULTS.resolve(ENVIRONMENT_FILE_NAME);
@@ -70,6 +71,7 @@ public class ReportUtils {
         }
     }
 
+
     private static Properties buildProperties() {
         Properties prop = new Properties();
         prop.setProperty("OS", GlobalConstants.OS_NAME);
@@ -95,5 +97,29 @@ public class ReportUtils {
 
     public static void attachFailureScreenshot(WebDriver driver) {
         attachScreenshot("Failed Step Screenshot", driver);
+    }
+
+    public static void bringHistory() {
+        try {
+            Path sourceHistory = ALLURE_REPORT.resolve("history");
+            Path targetHistory = ALLURE_RESULTS.resolve("history");
+            if (Files.exists(sourceHistory)) {
+                Files.createDirectories(targetHistory);
+                try (var stream = Files.walk(sourceHistory)) {
+                    stream.forEach(p -> {
+                        try {
+                            Path target = targetHistory.resolve(sourceHistory.relativize(p));
+                            if (Files.isDirectory(p)) Files.createDirectories(target);
+                            else Files.copy(p, target, StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e.getMessage());
+                        }
+                    });
+                }
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
