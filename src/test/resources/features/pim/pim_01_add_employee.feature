@@ -5,7 +5,8 @@ Feature: Add new employee
 
   Background:
     Given the admin has successfully logged in
-    And  navigates to the Add New Employee page
+    And navigates to the Employee List page
+    And clicks Add Employee page
 
   @positive
   Scenario Outline: Add an employee with valid data
