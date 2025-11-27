@@ -1,7 +1,7 @@
 package com.orangehrm.pages.sidebar;
 
 import com.orangehrm.core.BasePage;
-import com.orangehrm.ui.sibar.SidebarPUI;
+import com.orangehrm.ui.sidebar.SidebarPUI;
 import org.openqa.selenium.WebDriver;
 
 public class SidebarPO extends BasePage {

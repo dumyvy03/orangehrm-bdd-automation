@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.commons;
+package com.orangehrm.ui.sidebar;
 
 public class SidebarPUI {
     public static final String PIM_LINK = "Xpath=//ul[@class='oxd-main-menu']//span[text()='PIM']";
