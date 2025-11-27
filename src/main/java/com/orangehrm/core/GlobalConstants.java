@@ -1,4 +1,4 @@
-package com.orangehrm.commons;
+package com.orangehrm.core;
 
 import java.io.File;
 
