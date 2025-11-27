@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.pim;
+package com.orangehrm.ui.pim;
 
 public class AddEmployeePUI {
     public static final String EMPLOYEE_ID_TEXTBOX = "Xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input";
@@ -11,7 +11,9 @@ public class AddEmployeePUI {
 
     public static final String EMPLOYEE_AVATAR = "Css=div.employee-image-wrapper>img.employee-image";
 
-    public static final String LASTNAME_ERROR_TEXT = "Xpath=//input[@name='lastName']/parent::div/following-sibling::span";
+    public static final String FIRSTNAME_ERROR_MESSAGE = "Xpath=//input[@name='firstName']/parent::div/following-sibling::span";
 
-    public static final String AVATAR_ERROR_TEXTBOX = "Xpath=//img[@class='employee-image']/ancestor::div[contains(@class,'oxd-file-div')]/parent::div/following-sibling::span";
+    public static final String LASTNAME_ERROR_MESSAGE = "Xpath=//input[@name='lastName']/parent::div/following-sibling::span";
+
+    public static final String AVATAR_ERROR_MESSAGE = "Xpath=//img[@class='employee-image']/ancestor::div[contains(@class,'oxd-file-div')]/parent::div/following-sibling::span";
 }
