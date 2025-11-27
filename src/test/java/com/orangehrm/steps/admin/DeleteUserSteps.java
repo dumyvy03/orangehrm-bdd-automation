@@ -1,8 +1,8 @@
-package com.orangehrm.stepdefinitions.admin;
+package com.orangehrm.steps.admin;
 
-import com.orangehrm.commons.DriverFactory;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageobjects.admin.UserManagementPO;
+import com.orangehrm.core.DriverFactory;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.pages.admin.UserManagementPO;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -19,33 +19,28 @@ public class DeleteUserSteps {
     }
 
     @When("the admin searches for the user {string}")
-    public void theAdminSearchesForTheUser(String username) {
+    public void searchForUser(String username) {
         userManagementPage.enterUserNameTextbox(username);
         userManagementPage.clickSearchButton();
     }
 
-    @And("clicks the Delete button to remove selected user")
-    public void clicksTheDeleteButtonToRemoveSelectedUser() {
+    @And("clicks the Delete button to remove the selected user")
+    public void clickDeleteSelectedUser() {
         userManagementPage.clickDeleteSelectedButton();
     }
 
     @And("confirms the deletion")
-    public void confirmsTheDeletion() {
-        userManagementPage.clickConfirmButton();
+    public void clickConfirmDeletion() {
+        userManagementPage.clickDeleteConfirmButton();
     }
 
     @And("clicks the Delete button to remove user")
-    public void clicksTheDeleteButtonToRemoveUser() {
+    public void clickDeleteUser() {
         userManagementPage.clickDeleteButton();
     }
 
-    @Then("the system removes the user {string} from the user list")
-    public void theSystemRemovesTheUserFromTheUserList(String username) {
-        Assert.assertTrue(userManagementPage.isUserRemoved(username));
-    }
-
     @When("the admin selects multiple users from the user list")
-    public void theAdminSelectsMultipleUsersFromTheUserList(DataTable dataTable) {
+    public void selectMultipleUsers(DataTable dataTable) {
         Map<String, String> usernameData = dataTable.asMap(String.class, String.class);
         userManagementPage
                 .selectUsersByUsernames(
@@ -55,20 +50,24 @@ public class DeleteUserSteps {
     }
 
     @Then("the system removes all selected users from the user list")
-    public void theSystemRemovesAllSelectedUsersFromTheUserList(DataTable dataTable) {
+    public void verifySelectedUsersRemoved(DataTable dataTable) {
         Map<String, String> usernameData = dataTable.asMap(String.class, String.class);
         Assert.assertTrue(userManagementPage.areUsersRemoved(usernameData));
     }
 
-
     @And("cancels the deletion")
-    public void cancelsTheDeletion() {
-        userManagementPage.clickCancelButton();
+    public void clickCancelDeletion() {
+        userManagementPage.clickCancelConfirmButton();
     }
 
     @Then("the user {string} still appears in the user list")
-    public void theUserStillAppearsInTheUserList(String username) {
-        Assert.assertTrue(userManagementPage.isUserDisplayed(username));
+    public void verifyUserStillAppearsInList(String username) {
+        Assert.assertTrue(userManagementPage.isUsernameDisplayed(username));
+    }
+
+    @Then("the user table displays {string}")
+    public void verifyUserTableMessageDisplayed(String message) {
+        Assert.assertEquals(userManagementPage.getSearchResultMessage(), message);
     }
 
 }
