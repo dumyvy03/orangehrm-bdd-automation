@@ -1,9 +1,9 @@
-package com.orangehrm.stepdefinitions.commons;
+package com.orangehrm.steps.common;
 
-import com.orangehrm.commons.DriverFactory;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageobjects.dashboard.DashboardPO;
-import com.orangehrm.pages.pageobjects.login.LoginPO;
+import com.orangehrm.core.DriverFactory;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.pages.dashboard.DashboardPO;
+import com.orangehrm.pages.login.LoginPO;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebDriver;
@@ -25,18 +25,23 @@ public class PreconditionSteps {
     }
 
     @Given("the admin has successfully logged in")
-    public void theAdminHasSuccessfullyLoggedIn() {
+    public void adminLoggedIn() {
         DashboardPO dashboardPO = login("admin", "Admin@1234");
         Assert.assertTrue(dashboardPO.isDashboardVisible());
     }
 
     @And("navigates to the Employee List page")
-    public void navigatesToTheEmployeeListPage() {
+    public void navigateToEmployeeListPage() {
         PageGenerator.getSidebarPage(driver).openPIMPage();
     }
 
     @And("navigates to the User Management page")
-    public void navigatesToTheAdminPage() {
+    public void navigateToAdminPage() {
         PageGenerator.getSidebarPage(driver).openAdminPage();
+    }
+
+    @And("navigates to the Candidate page")
+    public void navigateToCandidatePage() {
+        PageGenerator.getSidebarPage(driver).openRecruitmentPage();
     }
 }
