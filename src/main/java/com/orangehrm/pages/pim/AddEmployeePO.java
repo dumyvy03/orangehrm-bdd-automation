@@ -15,6 +15,7 @@ public class AddEmployeePO extends BasePage {
     }
 
     public Dimension getAvatarSize() {
+        waitForElementVisible(driver, AddEmployeePUI.EMPLOYEE_AVATAR);
         return getElementSize(driver, AddEmployeePUI.EMPLOYEE_AVATAR);
     }
 
