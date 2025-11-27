@@ -47,21 +47,21 @@ public class LoginPO extends BasePage {
         enterPasswordTextbox(password);
     }
 
-    @Step("Get login error message")
+    @Step("Get Login error message")
     public String getLoginErrorMessage() {
         waitForElementVisible(driver, LoginPUI.LOGIN_ERROR_MESSAGE);
         sleep(2);
         return getElementText(driver, LoginPUI.LOGIN_ERROR_MESSAGE);
     }
 
-    @Step("Get username error message")
+    @Step("Get Username error message")
     public String getUsernameErrorMessage() {
         waitForElementVisible(driver, LoginPUI.USERNAME_ERROR_MESSAGE);
         sleep(1);
         return getElementText(driver, LoginPUI.USERNAME_ERROR_MESSAGE);
     }
 
-    @Step("Get password error message")
+    @Step("Get Password error message")
     public String getPasswordErrorMessage() {
         waitForElementVisible(driver, LoginPUI.PASSWORD_ERROR_MESSAGE);
         sleep(1);
