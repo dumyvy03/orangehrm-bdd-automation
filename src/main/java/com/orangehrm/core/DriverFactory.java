@@ -1,4 +1,4 @@
-package com.orangehrm.commons;
+package com.orangehrm.core;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +25,7 @@ public class DriverFactory {
             default:
                 throw new IllegalArgumentException("Browser not supported");
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.SHORT_TIMEOUT));
     }
 
     public static void initDriver(String browserName) {
