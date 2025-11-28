@@ -29,6 +29,7 @@ public class UserManagementPO extends BasePage {
     @Step("Click Add button")
     public AddUserPO clickAddButton() {
         waitForElementClickable(driver, UserManagementPUI.ADD_BUTTON);
+        sleep(1);
         clickElement(driver, UserManagementPUI.ADD_BUTTON);
         return PageGenerator.getAddUserPage(driver);
     }
