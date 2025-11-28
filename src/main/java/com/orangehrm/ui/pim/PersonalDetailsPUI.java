@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.pim;
+package com.orangehrm.ui.pim;
 
 public class PersonalDetailsPUI {
     public static final String EMPLOYEE_AVATAR = "Css=div.orangehrm-edit-employee-image>img.employee-image";
@@ -25,6 +25,9 @@ public class PersonalDetailsPUI {
 
     public static final String SAVE_PERSONAL_DETAILS_BUTTON = "Xpath=//h6[text()='Personal Details']/following-sibling::form//button[normalize-space(.)='Save']";
 
-    public static final String LICENSE_EXPIRY_DATE_ERROR_TEXT = "Xpath=//label[text()='License Expiry Date']/parent::div/following-sibling::span";
+    public static final String LICENSE_EXPIRY_DATE_ERROR_MESSAGE = "Xpath=//label[text()='License Expiry Date']/parent::div/following-sibling::span";
 
+    public static final String FIRSTNAME_ERROR_MESSAGE = "Xpath=//input[@name='firstName']/parent::div/following-sibling::span";
+
+    public static final String EMPLOYEE_LIST_LINK = "Xpath=//a[text()='Employee List']";
 }
