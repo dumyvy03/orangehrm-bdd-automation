@@ -1,6 +1,7 @@
-package com.orangehrm.pages.pageobjects.pim;
+package com.orangehrm.pages.pim;
 
-import com.orangehrm.pages.pageuis.pim.ChangeProfilePicturePUI;
+import com.orangehrm.ui.pim.ChangeProfilePicturePUI;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 public class ChangeProfilePicturePO extends EmployeeNavigationPO {
@@ -11,6 +12,7 @@ public class ChangeProfilePicturePO extends EmployeeNavigationPO {
         this.driver = driver;
     }
 
+    @Step("Upload Avatar")
     public void uploadAvatar(String avatarPath) {
         handleFileUpload(driver, avatarPath);
         waitForElementClickable(driver, ChangeProfilePicturePUI.SAVE_PROFILE_PICTURE_BUTTON);
