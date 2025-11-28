@@ -1,8 +1,8 @@
-package com.orangehrm.pages.pageobjects.pim;
+package com.orangehrm.pages.pim;
 
-import com.orangehrm.commons.BasePage;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageuis.pim.EmployeeNavigationPUI;
+import com.orangehrm.core.BasePage;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.ui.pim.EmployeeNavigationPUI;
 import org.openqa.selenium.WebDriver;
 
 public class EmployeeNavigationPO extends BasePage {
