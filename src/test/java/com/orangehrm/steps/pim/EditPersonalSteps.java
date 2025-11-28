@@ -1,10 +1,10 @@
-package com.orangehrm.stepdefinitions.pim;
+package com.orangehrm.steps.pim;
 
-import com.orangehrm.commons.DriverFactory;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageobjects.pim.ChangeProfilePicturePO;
-import com.orangehrm.pages.pageobjects.pim.EmployeeListPO;
-import com.orangehrm.pages.pageobjects.pim.PersonalDetailsPO;
+import com.orangehrm.core.DriverFactory;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.pages.pim.ChangeProfilePicturePO;
+import com.orangehrm.pages.pim.EmployeeListPO;
+import com.orangehrm.pages.pim.PersonalDetailsPO;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -14,39 +14,38 @@ import org.testng.Assert;
 
 import java.util.Map;
 
-public class EditEmployeeSteps {
+public class EditPersonalSteps {
     private EmployeeListPO employeeListPage;
     private PersonalDetailsPO personalDetailsPage;
 
     String firstName, lastName, driverLicense, licenseExpiryDate, nationality, maritalStatus, dateOfBirth, gender;
     Dimension avatarBeforeUploadSize;
 
-    public EditEmployeeSteps() {
+    public EditPersonalSteps() {
         employeeListPage = PageGenerator.getEmployeeListPage(DriverFactory.getDriver());
     }
 
-    @When("the admin searches by employee id {string}")
-    public void theAdminSearchesByEmployeeId(String employeeId) {
+    @When("the admin searches for the employee by ID {string}")
+    public void enterEmployeeId(String employeeId) {
         employeeListPage.enterEmployeeIdTextbox(employeeId);
     }
 
-    @And("the admin clicks the Search button")
-    public void theAdminClicksTheSearchButton() {
+    @And("clicks the Search button to find the employee for editing")
+    public void clickSearch() {
         employeeListPage.clickSearchButton();
     }
 
-    @And("clicks Edit button in search results")
-    public void clicksEditButton() {
-        personalDetailsPage = employeeListPage.clickEditButtonEmployeeList();
+    @And("clicks the Edit button in the search results")
+    public void clickEditEmployee() {
+        personalDetailsPage = employeeListPage.clickEditButton();
     }
 
-    @And("the admin updates personal details")
-    public void updatesEmployeeInformation(DataTable dataTable) {
+    @And("the admin updates the following personal details:")
+    public void updateEmployeeInformation(DataTable dataTable) {
         Map<String, String> updatedData = dataTable.asMap(String.class, String.class);
-        String avatarPath = updatedData.get("Avatar");
         avatarBeforeUploadSize = personalDetailsPage.getAvatarSize();
         ChangeProfilePicturePO changeProfilePicturePage = personalDetailsPage.openChangeProfilePicturePage();
-        changeProfilePicturePage.uploadAvatar(avatarPath);
+        changeProfilePicturePage.uploadAvatar(updatedData.get("Avatar"));
         personalDetailsPage = changeProfilePicturePage.openPersonalDetailsPage();
 
         firstName = updatedData.get("First Name");
@@ -62,15 +61,15 @@ public class EditEmployeeSteps {
     }
 
     @And("clicks the Save button to update")
-    public void theAdminClicksTheSaveButtonToUpdate() {
-        personalDetailsPage.clickSaveButtonPersonalDetails();
+    public void clickSaveUpdate() {
+        personalDetailsPage.clickSaveButton();
     }
 
     @Then("the system saves the updated information successfully")
     public void verifyUpdatedInformation() {
         Assert.assertEquals(personalDetailsPage.getFirstNameValue(), firstName);
         Assert.assertEquals(personalDetailsPage.getLastNameValue(), lastName);
-        Assert.assertEquals(personalDetailsPage.getDriverLicenseNumberValue(), driverLicense);
+        Assert.assertEquals(personalDetailsPage.getDriverLicenseValue(), driverLicense);
         Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateValue(), licenseExpiryDate);
         Assert.assertEquals(personalDetailsPage.getSelectedNationalityText(), nationality);
         Assert.assertEquals(personalDetailsPage.getSelectedMaritalStatusText(), maritalStatus);
@@ -79,19 +78,23 @@ public class EditEmployeeSteps {
         Assert.assertTrue(personalDetailsPage.isAvatarUploaded(avatarBeforeUploadSize));
     }
 
-    @And("the admin updates license expiry date {string}")
-    public void theAdminUpdatesLicenseExpiryDate(String licenseExpiryDate) {
+    @And("the admin updates the license expiry date with {string}")
+    public void enterLicenseExpiryDate(String licenseExpiryDate) {
         personalDetailsPage.enterLicenseExpiryDateTextbox(licenseExpiryDate);
     }
 
-    @And("the admin updates first name empty {string}")
-    public void theAdminUpdatesFirstNameEmpty(String firstName) {
+    @And("the admin updates the first name with {string}")
+    public void enterFirstName(String firstName) {
         personalDetailsPage.enterFirstNameTextbox(firstName);
     }
 
-    @Then("the license expiry date field shows error {string}")
-    public void verifyLicenseExpiryDateFieldShowsError(String errorMessage) {
+    @Then("the Personal Details license expiry date field displays the error {string}")
+    public void verifyLicenseExpiryDateErrorDisplayed(String errorMessage) {
         Assert.assertEquals(personalDetailsPage.getLicenseExpiryDateErrorMessage(), errorMessage);
     }
 
+    @Then("the Personal Details first name field displays the error {string}")
+    public void verifyFirstNameErrorDisplayed(String errorMessage) {
+        Assert.assertEquals(personalDetailsPage.getFirstNameErrorMessage(), errorMessage);
+    }
 }
