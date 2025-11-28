@@ -13,8 +13,8 @@ Feature: Search employee
     And clicks the Search button to find the employee
     Then the results list displays the employee with the name "<emp_name>"
     Examples:
-      | emp_name   |
-      | Hang Smith |
+      | emp_name |
+      | Vy Du    |
 
   @positive
   Scenario Outline: Search for an employee regardless of letter case
@@ -22,8 +22,8 @@ Feature: Search employee
     And clicks the Search button to find the employee
     Then the results list displays the employee with the name "<emp_name>"
     Examples:
-      | emp_name   |
-      | haNG sMItH |
+      | emp_name |
+      | vY DU    |
 
   @negative
   Scenario Outline: Search for an employee using special characters
