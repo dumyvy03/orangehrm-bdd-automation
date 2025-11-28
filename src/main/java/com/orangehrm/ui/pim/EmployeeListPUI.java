@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.pim;
+package com.orangehrm.ui.pim;
 
 public class EmployeeListPUI {
     public static final String ADD_EMPLOYEE_LINK = "Xpath=//a[text()='Add Employee']";
@@ -20,5 +20,7 @@ public class EmployeeListPUI {
     public static final String EMPLOYEE_NAME_TEXTBOX = "Xpath=//label[text()='Employee Name']/parent::div/following-sibling::div//input";
 
     public static final String SEARCH_BUTTON = "Xpath=//button[contains(normalize-space(.), 'Search')]";
+
+    public static final String SEARCH_RESULT_MESSAGE = "Css=div.orangehrm-horizontal-padding>span";
 
 }
