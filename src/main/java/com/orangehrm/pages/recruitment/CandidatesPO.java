@@ -1,8 +1,9 @@
-package com.orangehrm.pages.pageobjects.recruitment;
+package com.orangehrm.pages.recruitment;
 
-import com.orangehrm.commons.BasePage;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageuis.recruitment.CandidatesPUI;
+import com.orangehrm.core.BasePage;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.ui.recruitment.CandidatesPUI;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 public class CandidatesPO extends BasePage {
@@ -12,9 +13,12 @@ public class CandidatesPO extends BasePage {
         this.driver = driver;
     }
 
+    @Step("Click Add button")
     public AddCandidatePO clickAddButton() {
-        scrollToElement(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
+        waitForElementVisible(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
+        scrollIntoViewJS(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
         waitForElementClickable(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
+        sleep(1);
         clickElement(driver, CandidatesPUI.ADD_CANDIDATES_BUTTON);
         waitForLoadingIconInvisible(driver);
         return PageGenerator.getAddCandidatePage(driver);
