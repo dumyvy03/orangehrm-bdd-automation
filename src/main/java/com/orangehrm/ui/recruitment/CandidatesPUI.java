@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.recruitment;
+package com.orangehrm.ui.recruitment;
 
 public class CandidatesPUI {
     public static final String ADD_CANDIDATES_BUTTON = "Xpath=//button[normalize-space(.)='Add']";
