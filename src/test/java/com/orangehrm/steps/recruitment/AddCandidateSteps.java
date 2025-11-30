@@ -1,42 +1,35 @@
-package com.orangehrm.stepdefinitions.recruitment;
+package com.orangehrm.steps.recruitment;
 
-import com.orangehrm.commons.DriverFactory;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageobjects.recruitment.AddCandidatePO;
-import com.orangehrm.pages.pageobjects.recruitment.CandidateProfilePO;
-import com.orangehrm.pages.pageobjects.recruitment.CandidatesPO;
+import com.orangehrm.core.DriverFactory;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.pages.recruitment.AddCandidatePO;
+import com.orangehrm.pages.recruitment.CandidateProfilePO;
+import com.orangehrm.pages.recruitment.CandidatesPO;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import java.util.Map;
 
 public class AddCandidateSteps {
-    private final WebDriver driver;
     private CandidatesPO candidatePage;
     private AddCandidatePO addCandidatePage;
     private String firstName, lastName, email, contactNumber, resume, vacancy, keywords, dateOfApplication, notes;
     private CandidateProfilePO candidateProfilePage;
 
     public AddCandidateSteps() {
-        driver = DriverFactory.getDriver();
-    }
-
-    @And("navigates to the Candidate page")
-    public void navigatesToCandidatePage() {
-        candidatePage = PageGenerator.getSidebarPage(driver).openRecruitmentPage();
+        candidatePage = PageGenerator.getCandidatesPage(DriverFactory.getDriver());
     }
 
     @And("clicks the Add button to open the Add Candidate page")
-    public void clicksTheAddButtonToOpenTheAddCandidatePage() {
+    public void clickOpenAddCandidatePage() {
         addCandidatePage = candidatePage.clickAddButton();
     }
 
-    @And("the admin enters candidate information")
-    public void entersCandidateInformation(DataTable dataTable) {
+    @And("the admin enters the candidate's information:")
+    public void enterCandidateInformation(DataTable dataTable) {
         Map<String, String> addCandidateData = dataTable.asMap(String.class, String.class);
         firstName = addCandidateData.get("First Name");
         lastName = addCandidateData.get("Last Name");
@@ -48,17 +41,16 @@ public class AddCandidateSteps {
         notes = addCandidateData.get("Notes");
 
         addCandidatePage.enterCandidateInformation(addCandidateData);
-
     }
 
-    @And("clicks the Save button to add a new candidate")
-    public void clicksTheSaveButtonToAddANewCandidate() {
+    @And("clicks the Save button to create the new candidate")
+    public void clickSaveNewCandidate() {
         dateOfApplication = addCandidatePage.getDateOfApplicationValue();
         candidateProfilePage = addCandidatePage.clickSaveButton();
     }
 
     @Then("the Candidate Profile page displays the candidate’s details")
-    public void verifyCandidateProfilePageDisplaysTheCandidateSDetails() {
+    public void verifyCandidateSDetailsDisplayed() {
         Assert.assertEquals(candidateProfilePage.getFirstNameValue(), firstName);
         Assert.assertEquals(candidateProfilePage.getLastNameValue(), lastName);
         Assert.assertEquals(candidateProfilePage.getJobVacancyText(), vacancy);
@@ -70,34 +62,33 @@ public class AddCandidateSteps {
         Assert.assertEquals(candidateProfilePage.getNotesValue(), notes);
     }
 
-
-    @When("the admin enters email {string}")
-    public void entersEmail(String email) {
+    @When("the admin enters the email {string}")
+    public void enterEmail(String email) {
         addCandidatePage.enterEmailTextbox(email);
     }
 
-    @Then("the email field shows error {string}")
-    public void verifyEmailFieldShowsError(String errorMessage) {
+    @Then("the Add Candidate email field displays the error {string}")
+    public void verifyEmailErrorDisplayed(String errorMessage) {
         Assert.assertEquals(addCandidatePage.getEmailErrorMessage(), errorMessage);
     }
 
-    @When("the admin uploads resume file {string}")
-    public void uploadsResumeFile(String resume) {
+    @When("the admin uploads the resume file {string}")
+    public void uploadResumeFile(String resume) {
         addCandidatePage.uploadResumeFile(resume);
     }
 
-    @Then("the resume field shows error {string}")
-    public void theResumeFieldShowsError(String errorMessage) {
+    @Then("the Add Candidate resume field displays the error {string}")
+    public void verifyResumeErrorDisplayed(String errorMessage) {
         Assert.assertEquals(addCandidatePage.getResumeErrorMessage(), errorMessage);
     }
 
-    @When("the admin enters contact number {string}")
-    public void theAdminEntersContactNumber(String contactNumber) {
+    @When("the admin enters the contact number {string}")
+    public void enterContactNumber(String contactNumber) {
         addCandidatePage.enterContactNumberTextbox(contactNumber);
     }
 
-    @Then("the contact number field shows error {string}")
-    public void theContactNumberFieldShowsError(String errorMessage) {
+    @Then("the Add Candidate contact number field displays the error {string}")
+    public void verifyContactNumberErrorDisplayed(String errorMessage) {
         Assert.assertEquals(addCandidatePage.getContactNumberErrorMessage(), errorMessage);
     }
 
