@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="OrangeHRM - Automation Testing">
+    <test name="Run on Chrome browser">
+        <parameter name="browsers" value="chrome"/>
+        <classes>
+            <class name="com.orangehrm.support.ReportSetup"/>
+            <!--            <class name="com.orangehrm.runners.AdminTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runners.LoginTestRunner"/>-->
+            <!--            <class name="com.orangehrm.runners.PimTestRunner"/>-->
+            <class name="com.orangehrm.runners.RecruitmentTestRunner"/>
+        </classes>
+    </test>
+</suite>
+
