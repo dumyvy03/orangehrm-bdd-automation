@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.recruitment;
+package com.orangehrm.ui.recruitment;
 
 public class CandidateProfilePUI {
     public static final String FIRSTNAME_TEXTBOX = "Css=input.orangehrm-firstname";
