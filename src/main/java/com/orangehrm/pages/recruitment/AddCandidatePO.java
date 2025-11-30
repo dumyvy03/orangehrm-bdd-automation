@@ -1,8 +1,9 @@
-package com.orangehrm.pages.pageobjects.recruitment;
+package com.orangehrm.pages.recruitment;
 
-import com.orangehrm.commons.BasePage;
-import com.orangehrm.commons.PageGenerator;
-import com.orangehrm.pages.pageuis.recruitment.AddCandidatePUI;
+import com.orangehrm.core.BasePage;
+import com.orangehrm.core.PageGenerator;
+import com.orangehrm.ui.recruitment.AddCandidatePUI;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Map;
@@ -14,53 +15,62 @@ public class AddCandidatePO extends BasePage {
         this.driver = driver;
     }
 
+    @Step("Enter First Name: {0}")
     public void enterFirstNameTextbox(String firstName) {
         waitForElementVisible(driver, AddCandidatePUI.FIRSTNAME_TEXTBOX);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.FIRSTNAME_TEXTBOX, firstName);
+        sleep(1);
     }
 
+    @Step("Enter Last Name: {0}")
     public void enterLastNameTextbox(String lastName) {
         waitForElementVisible(driver, AddCandidatePUI.LASTNAME_TEXTBOX);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.LASTNAME_TEXTBOX, lastName);
+        sleep(1);
     }
 
+    @Step("Select Vacancy: {0}")
     public void selectVacancyDropdown(String vacancy) {
         waitForElementClickable(driver, AddCandidatePUI.VACANCY_DROPDOWN_PARENT);
-        sleep(1);
         selectDropdownCustomer(driver, AddCandidatePUI.VACANCY_DROPDOWN_PARENT, AddCandidatePUI.VACANCY_DROPDOWN_CHILD, vacancy);
+        sleep(1);
     }
 
+    @Step("Enter Email: {0}")
     public void enterEmailTextbox(String email) {
         waitForElementVisible(driver, AddCandidatePUI.EMAIL_TEXTBOX);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.EMAIL_TEXTBOX, email);
+        sleep(1);
     }
 
+    @Step("Enter Contact Number: {0}")
     public void enterContactNumberTextbox(String contactNumber) {
         waitForElementVisible(driver, AddCandidatePUI.CONTACT_NUMBER_TEXTBOX);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.CONTACT_NUMBER_TEXTBOX, contactNumber);
-    }
-
-    public void uploadResumeFile(String resume) {
         sleep(1);
-        handleFileUpload(driver, resume);
     }
 
+    @Step("Upload Resume: {0}")
+    public void uploadResumeFile(String resume) {
+        handleFileUpload(driver, resume);
+        sleep(1);
+    }
+
+    @Step("Enter Keywords: {0}")
     public void enterKeywordsTextbox(String keywords) {
         waitForElementVisible(driver, AddCandidatePUI.KEYWORDS_TEXTBOX);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.KEYWORDS_TEXTBOX, keywords);
+        sleep(1);
     }
 
+    @Step("Enter Notes: {0}")
     public void enterNotesTextarea(String notes) {
         waitForElementVisible(driver, AddCandidatePUI.NOTES_TEXTAREA);
-        sleep(1);
         sendKeysElement(driver, AddCandidatePUI.NOTES_TEXTAREA, notes);
+        sleep(1);
     }
 
+    @Step("Enter candidate information")
     public void enterCandidateInformation(Map<String, String> addCandidateData) {
         enterFirstNameTextbox(addCandidateData.get("First Name"));
         enterLastNameTextbox(addCandidateData.get("Last Name"));
@@ -72,6 +82,7 @@ public class AddCandidatePO extends BasePage {
         enterNotesTextarea(addCandidateData.get("Notes"));
     }
 
+    @Step("Click Save button")
     public CandidateProfilePO clickSaveButton() {
         waitForElementClickable(driver, AddCandidatePUI.SAVE_BUTTON);
         sleep(1);
@@ -80,26 +91,27 @@ public class AddCandidatePO extends BasePage {
         return PageGenerator.getCandidateProfilePage(driver);
     }
 
+    @Step("Get Date Of Application value")
     public String getDateOfApplicationValue() {
-        waitForElementPresence(driver, AddCandidatePUI.DATE_OF_APPLICATION_TEXTBOX);
+        waitForElementVisible(driver, AddCandidatePUI.DATE_OF_APPLICATION_TEXTBOX);
         return getAttributeValue(driver, AddCandidatePUI.DATE_OF_APPLICATION_TEXTBOX, "value");
     }
 
+    @Step("Get Email error message")
     public String getEmailErrorMessage() {
-        waitForElementVisible(driver, AddCandidatePUI.EMAIL_ERR0R_TEXT);
-        sleep(2);
-        return getElementText(driver, AddCandidatePUI.EMAIL_ERR0R_TEXT);
+        waitForElementVisible(driver, AddCandidatePUI.EMAIL_ERR0R_MESSSAGE);
+        return getElementText(driver, AddCandidatePUI.EMAIL_ERR0R_MESSSAGE);
     }
 
+    @Step("Get Resume error message")
     public String getResumeErrorMessage() {
-        waitForElementVisible(driver, AddCandidatePUI.RESUME_ERROR_TEXT);
-        sleep(2);
-        return getElementText(driver, AddCandidatePUI.RESUME_ERROR_TEXT);
+        waitForElementVisible(driver, AddCandidatePUI.RESUME_ERROR_MESSAGE);
+        return getElementText(driver, AddCandidatePUI.RESUME_ERROR_MESSAGE);
     }
 
+    @Step("Get Contact Number error message")
     public String getContactNumberErrorMessage() {
-        waitForElementVisible(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_TEXT);
-        sleep(2);
-        return getElementText(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_TEXT);
+        waitForElementVisible(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_MESSAGE);
+        return getElementText(driver, AddCandidatePUI.CONTACT_NUMBER_ERR0R_MESSAGE);
     }
 }
