@@ -1,4 +1,4 @@
-package com.orangehrm.pages.pageuis.recruitment;
+package com.orangehrm.ui.recruitment;
 
 public class AddCandidatePUI {
     public static final String FIRSTNAME_TEXTBOX = "Css=input.orangehrm-firstname";
@@ -20,11 +20,11 @@ public class AddCandidatePUI {
 
     public static final String SAVE_BUTTON = "Xpath=//button[normalize-space(.)='Save']";
 
-    public static final String EMAIL_ERR0R_TEXT = "Xpath=//label[text()='Email']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
+    public static final String EMAIL_ERR0R_MESSSAGE = "Xpath=//label[text()='Email']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
 
-    public static final String RESUME_ERROR_TEXT = "Xpath=//label[text()='Resume']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
+    public static final String RESUME_ERROR_MESSAGE = "Xpath=//label[text()='Resume']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
 
-    public static final String CONTACT_NUMBER_ERR0R_TEXT = "Xpath=//label[text()='Contact Number']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
+    public static final String CONTACT_NUMBER_ERR0R_MESSAGE = "Xpath=//label[text()='Contact Number']/parent::div/following-sibling::span[contains(@class,'oxd-input-field-error-message')]";
 
 
 }
